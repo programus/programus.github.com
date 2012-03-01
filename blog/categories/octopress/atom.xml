@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://programus.github.com/"/>
+  <updated>2012-03-01T22:01:20+09:00</updated>
+  <id>http://programus.github.com/</id>
+  <author>
+    <name><![CDATA[程序猎人]]></name>
+    <email><![CDATA[programus@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[第一篇用Octopress生成的日志]]></title>
+    <link href="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/"/>
+    <updated>2012-03-01T21:31:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/01/first-post-by-octopress</id>
+    <content type="html"><![CDATA[<p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
+
+<p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对[Ruby][]那么大意见，所以装了运行Jekyll的一切必需品，现学[Git][]（这个早就听说了，一直没用到所以没学）、[Jekyll][]、[Markdown][]……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
+
+<p>经过一番查找，发现是因为[Jekyll]运行时使用默认环境的地区编码信息，所以不识别UTF-8编码中的中文。从网上搜到Windows下可以使用<code>chcp</code>来改变语言编码，于是试了试<code>chcp 65001</code>，发现运行</p>
+
+<pre><code>jekyll --pygments --safe --auto --server
+</code></pre>
+
+<p>之后没有任何显示。遂放弃。</p>
+
+<p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
+
+<pre><code>set LANG=zh_CN.UTF-8
+set LC_ALL=zh_CN.UTF-8
+</code></pre>
+
+<p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
+
+<p>于是才有了此篇日志。</p>
+
+<hr />
+
+<p>本来用[Jekyll][]的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了[Octopress][]这个东西。于是毅然变节，改投[Octopress][]，于是有了现在的后半段。</p>
+
+<p>[Octopress][]比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>origin</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
+
+<p>对[Git][]还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>程序猎人的博客</title>
+  <title>Category: jekyll - 程序猎人的博客</title>
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="先是在知乎上发现了一个叫吕坤的人，顺着简介发现了他的博客。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。 我不像吕坤对Ruby那么大意见，所以装了运行Jekyll的一切必需品，现学Git（这个早就听说了，一直没用到所以没学）、Jekyll、Markdown……折腾了一个星期天， &hellip;">
+  <meta name="description" content="Category: jekyll">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://programus.github.com">
+  <link rel="canonical" href="http://programus.github.comblog/categories/jekyll">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -74,78 +74,40 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
-  
-  
-    <article>
-      
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/01/first-post-by-octopress/">第一篇用Octopress生成的日志</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-01T21:31:00+09:00" pubdate data-updated="true">2012-03-01</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Jekyll</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-  <div class="entry-content"><p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
 
-<p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对<a href="http://www.ruby-lang.org" title="Ruby">Ruby</a>那么大意见，所以装了运行Jekyll的一切必需品，现学<a href="http://git-scm.com/" title="Git">Git</a>（这个早就听说了，一直没用到所以没学）、<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>、<a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a>……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
+  
+  <h2>2012</h2>
 
-<p>经过一番查找，发现是因为<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>运行时使用默认环境的地区编码信息，所以不识别UTF-8编码中的中文。从网上搜到Windows下可以使用<code>chcp</code>来改变语言编码，于是试了试<code>chcp 65001</code>，发现运行</p>
+<article>
+  
+<h1><a href="/blog/2012/03/01/first-post-by-octopress/">第一篇用Octopress生成的日志</a></h1>
+<time datetime="2012-03-01T21:31:00+09:00" pubdate><span class='month'>Mar</span> <span class='day'>01</span> <span class='year'>2012</span></time>
 
-<pre><code>jekyll --pygments --safe --auto --server
-</code></pre>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/计算机/'>计算机</a></span>
+</footer>
 
-<p>之后没有任何显示。遂放弃。</p>
 
-<p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
+</article>
 
-<pre><code>set LANG=zh_CN.UTF-8
-set LC_ALL=zh_CN.UTF-8
-</code></pre>
-
-<p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
-
-<p>于是才有了此篇日志。</p>
-
-<hr />
-
-<p>本来用<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了<a href="http://octopress.org" title="Octopress">Octopress</a>这个东西。于是毅然变节，改投<a href="http://octopress.org" title="Octopress">Octopress</a>，于是有了现在的后半段。</p>
-
-<p><a href="http://octopress.org" title="Octopress">Octopress</a>比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>origin</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
-
-<p>对<a href="http://git-scm.com/" title="Git">Git</a>还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
 </div>
-  
-  
 
-
-    </article>
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+</article>
+
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -162,7 +124,7 @@ set LC_ALL=zh_CN.UTF-8
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/programus">@programus</a> on GitHub
@@ -192,7 +154,7 @@ set LC_ALL=zh_CN.UTF-8
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -220,6 +182,7 @@ set LC_ALL=zh_CN.UTF-8
 
   
 </aside>
+
 
     </div>
   </div>
