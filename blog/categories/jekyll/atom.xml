@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jekyll | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-01T22:12:43+09:00</updated>
+  <updated>2012-03-01T23:54:51+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -31,9 +31,10 @@
 
 <p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
 
-<pre><code>set LANG=zh_CN.UTF-8
+<p><code>
+set LANG=zh_CN.UTF-8
 set LC_ALL=zh_CN.UTF-8
-</code></pre>
+</code></p>
 
 <p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
 
