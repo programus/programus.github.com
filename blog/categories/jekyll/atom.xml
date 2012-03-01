@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jekyll | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-01T22:01:20+09:00</updated>
+  <updated>2012-03-01T22:12:43+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -43,7 +43,7 @@ set LC_ALL=zh_CN.UTF-8
 
 <p>本来用[Jekyll][]的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了[Octopress][]这个东西。于是毅然变节，改投[Octopress][]，于是有了现在的后半段。</p>
 
-<p>[Octopress][]比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>origin</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
+<p>[Octopress][]比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>master</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
 
 <p>对[Git][]还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
 
