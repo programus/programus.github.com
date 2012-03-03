@@ -4,7 +4,7 @@
   <title><![CDATA[程序猎人的博客]]></title>
   <link href="http://programus.github.com/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-04T00:02:17+09:00</updated>
+  <updated>2012-03-04T00:11:41+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -18,14 +18,14 @@
     <link href="http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress/"/>
     <updated>2012-03-03T21:43:00+09:00</updated>
     <id>http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress</id>
-    <content type="html"><![CDATA[<p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有Twitter等内容。因为<a href="http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" title="叹息之墙">墙</a>的原因，Twitter始终使用起来不够方便，所以还是<a href="http://weibo.com" title="新浪微博">新浪微博</a>用的更多。所以，就想在博客里弄一个<a href="http://weibo.com" title="新浪微博">微博</a>的侧边栏。</p>
+    <content type="html"><![CDATA[<p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有<a href="http://twitter.com/" title="Twitter">Twitter</a>等内容。因为<a href="http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" title="叹息之墙">墙</a>的原因，<a href="http://twitter.com/" title="Twitter">Twitter</a>始终使用起来不够方便，所以还是<a href="http://weibo.com" title="新浪微博">新浪微博</a>用的更多。于是，就想在博客里弄一个<a href="http://weibo.com" title="新浪微博">微博</a>的侧边栏。</p>
 
 <!--more-->
 
 
 <p><img class="left" src="http://programus.github.com/images/posts/octopress-weibo.png" title="" ></p>
 
-<h3>想法</h3>
+<h3>实现设想</h3>
 
 <p><a href="http://weibo.com" title="新浪微博">微博</a>本身提供了一个嵌入侧边栏的工具，叫<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。于是便想是不是简单嵌入即可呢？</p>
 
@@ -85,7 +85,7 @@
 </span><span class='line'>&lt;/iframe&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
+<p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题名&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
 
 <div><script src='https://gist.github.com/1966517.js?file='></script>
 <noscript><pre><code>{% if site.weibo_uid %}
@@ -115,9 +115,9 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/twitter.html, asides/googleplus.html]
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
 </span><span class='line'>
-</span><span class='line'># ....
+</span><span class='line'># 其它内容....
 </span><span class='line'>
 </span><span class='line'># Weibo
 </span><span class='line'># Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
