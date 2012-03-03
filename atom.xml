@@ -4,7 +4,7 @@
   <title><![CDATA[程序猎人的博客]]></title>
   <link href="http://programus.github.com/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-03T21:02:46+09:00</updated>
+  <updated>2012-03-04T00:02:17+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -14,11 +14,136 @@
 
   
   <entry>
+    <title type="html"><![CDATA[为Octopress博客追加新浪微博侧栏]]></title>
+    <link href="http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress/"/>
+    <updated>2012-03-03T21:43:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress</id>
+    <content type="html"><![CDATA[<p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有Twitter等内容。因为<a href="http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" title="叹息之墙">墙</a>的原因，Twitter始终使用起来不够方便，所以还是<a href="http://weibo.com" title="新浪微博">新浪微博</a>用的更多。所以，就想在博客里弄一个<a href="http://weibo.com" title="新浪微博">微博</a>的侧边栏。</p>
+
+<!--more-->
+
+
+<p><img class="left" src="http://programus.github.com/images/posts/octopress-weibo.png" title="" ></p>
+
+<h3>想法</h3>
+
+<p><a href="http://weibo.com" title="新浪微博">微博</a>本身提供了一个嵌入侧边栏的工具，叫<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。于是便想是不是简单嵌入即可呢？</p>
+
+<h3>其他尝试</h3>
+
+<p>但对稍有点费劲的工作，当然首先是上网搜索一下是否有现成方案。果然找到了一篇文章——《<a href="http://blog.tingkun.com/blog/2011/11/05/xin-lang-wei-bo-ce-lan-widgetding-zhi-octopress/">新浪微博侧栏widget定制</a>》。</p>
+
+<p>仔细查看了一下代码，发现作者好粗心，代码里居然没有用变量，而是把自己的用户名直接硬写进去了。另外，貌似只实现了<code>微博名片</code>和<code>关注按钮</code>。而且因为使用了<a href="http://weibo.com" title="新浪微博">微博</a>的JavaScript API，所以需要一个APP ID。</p>
+
+<h3>回归</h3>
+
+<p>我是懒人，不想搞得那么复杂。于是继续回到自己最初的方案——嵌入<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。</p>
+
+<p>先到<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>里面生成自己的微博秀嵌入代码。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iframe 
+</span><span class='line'>  width="100%" 
+</span><span class='line'>  height="550" 
+</span><span class='line'>  class="share_self"  
+</span><span class='line'>  frameborder="0" 
+</span><span class='line'>  scrolling="no" 
+</span><span class='line'>  src="http://widget.weibo.com/weiboshow/index.php?
+</span><span class='line'>      width=0&
+</span><span class='line'>      height=550&
+</span><span class='line'>      fansRow=1&
+</span><span class='line'>      ptype=1&
+</span><span class='line'>      speed=0&
+</span><span class='line'>      skin=2&
+</span><span class='line'>      isTitle=0&
+</span><span class='line'>      noborder=1&
+</span><span class='line'>      isWeibo=1&
+</span><span class='line'>      isFans=1&
+</span><span class='line'>      uid=1098907490&
+</span><span class='line'>      verifier=abd54ad9&
+</span><span class='line'>      dpc=1"&gt;
+</span><span class='line'>&lt;/iframe&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
+
+<div><script src='https://gist.github.com/1966517.js?file='></script>
+<noscript><pre><code>{% if site.weibo_uid %}
+&lt;section&gt;
+  &lt;h1&gt;新浪微博&lt;/h1&gt;
+  &lt;ul id=&quot;weibo&quot;&gt;
+    &lt;li&gt;
+      &lt;iframe width=&quot;100%&quot; height=&quot;550&quot; class=&quot;share_self&quot;  frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;http://widget.weibo.com/weiboshow/index.php?width=0&amp;height=550&amp;ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&amp;speed=0&amp;skin={{weibo_skin}}&amp;isTitle=0&amp;noborder=1&amp;isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&amp;isFans={{weibo_fansline}}&amp;uid={{site.weibo_uid}}&amp;verifier={{site.weibo_verifier}}&quot;&gt;&lt;/iframe&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+{% endif %}
+</code></pre></noscript></div>
+
+
+<p>同时，在<code>_config.yml</code>中加入相关设定——</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/twitter.html, asides/googleplus.html]
+</span><span class='line'>
+</span><span class='line'># ....
+</span><span class='line'>
+</span><span class='line'># Weibo
+</span><span class='line'># Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
+</span><span class='line'>weibo_uid: 1098907490
+</span><span class='line'>weibo_verifier: abd54ad9
+</span><span class='line'>weibo_fansline: 0   # 粉丝显示多少行
+</span><span class='line'>weibo_show: true    # 是否显示最近微博内容
+</span><span class='line'>weibo_pic: true     # 是否显示微博中的图片
+</span><span class='line'>weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中的<code>weibo_uid</code>和<code>weibo_verifier</code>是从<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>生成的代码中取得的，其它则是显示设定。</p>
+
+<p>至此，搞定了微博的嵌入。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[第一篇用Octopress生成的日志]]></title>
     <link href="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/"/>
     <updated>2012-03-01T21:31:00+09:00</updated>
     <id>http://programus.github.com/blog/2012/03/01/first-post-by-octopress</id>
     <content type="html"><![CDATA[<p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
+
+<!--more-->
+
 
 <p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对<a href="http://www.ruby-lang.org" title="Ruby">Ruby</a>那么大意见，所以装了运行Jekyll的一切必需品，现学<a href="http://git-scm.com/" title="Git">Git</a>（这个早就听说了，一直没用到所以没学）、<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>、<a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a>……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
 

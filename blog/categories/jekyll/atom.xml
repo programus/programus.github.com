@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jekyll | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-03T21:02:46+09:00</updated>
+  <updated>2012-03-04T00:02:17+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -14,11 +14,128 @@
 
   
   <entry>
+    <title type="html"><![CDATA[为Octopress博客追加新浪微博侧栏]]></title>
+    <link href="http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress/"/>
+    <updated>2012-03-03T21:43:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress</id>
+    <content type="html"><![CDATA[<p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有Twitter等内容。因为[墙][]的原因，Twitter始终使用起来不够方便，所以还是[新浪微博][]用的更多。所以，就想在博客里弄一个[微博][]的侧边栏。</p>
+
+<!--more-->
+
+
+<p><img class="left" src="/images/posts/octopress-weibo.png" title="" ></p>
+
+<h3>想法</h3>
+
+<p>[微博][]本身提供了一个嵌入侧边栏的工具，叫<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。于是便想是不是简单嵌入即可呢？</p>
+
+<h3>其他尝试</h3>
+
+<p>但对稍有点费劲的工作，当然首先是上网搜索一下是否有现成方案。果然找到了一篇文章——《<a href="http://blog.tingkun.com/blog/2011/11/05/xin-lang-wei-bo-ce-lan-widgetding-zhi-octopress/">新浪微博侧栏widget定制</a>》。</p>
+
+<p>仔细查看了一下代码，发现作者好粗心，代码里居然没有用变量，而是把自己的用户名直接硬写进去了。另外，貌似只实现了<code>微博名片</code>和<code>关注按钮</code>。而且因为使用了[微博][]的JavaScript API，所以需要一个APP ID。</p>
+
+<h3>回归</h3>
+
+<p>我是懒人，不想搞得那么复杂。于是继续回到自己最初的方案——嵌入<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。</p>
+
+<p>先到<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>里面生成自己的微博秀嵌入代码。</p>
+
+<p>```</p>
+
+<iframe 
+    width="100%" 
+    height="550" 
+    class="share_self"  
+    frameborder="0" 
+    scrolling="no" 
+    src="http://widget.weibo.com/weiboshow/index.php?
+        width=0&
+        height=550&
+        fansRow=1&
+        ptype=1&
+        speed=0&
+        skin=2&
+        isTitle=0&
+        noborder=1&
+        isWeibo=1&
+        isFans=1&
+        uid=1098907490&
+        verifier=abd54ad9&
+        dpc=1">
+</iframe>
+
+
+<p>```</p>
+
+<p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
+
+<p><div><script src='https://gist.github.com/1966517.js?file='></script>
+<noscript><pre><code>{% if site.weibo_uid %}
+&lt;section&gt;
+  &lt;h1&gt;新浪微博&lt;/h1&gt;
+  &lt;ul id=&quot;weibo&quot;&gt;
+    &lt;li&gt;
+      &lt;iframe width=&quot;100%&quot; height=&quot;550&quot; class=&quot;share_self&quot;  frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;http://widget.weibo.com/weiboshow/index.php?width=0&amp;height=550&amp;ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&amp;speed=0&amp;skin={{weibo_skin}}&amp;isTitle=0&amp;noborder=1&amp;isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&amp;isFans={{weibo_fansline}}&amp;uid={{site.weibo_uid}}&amp;verifier={{site.weibo_verifier}}&quot;&gt;&lt;/iframe&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+{% endif %}
+</code></pre></noscript></div>
+</p>
+
+<p>同时，在<code>_config.yml</code>中加入相关设定——</p>
+
+<p>```
+default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/twitter.html, asides/googleplus.html]</p>
+
+<h1>....</h1>
+
+<h1>Weibo</h1>
+
+<h1>Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier.</h1>
+
+<p>weibo_uid: 1098907490
+weibo_verifier: abd54ad9
+weibo_fansline: 0   # 粉丝显示多少行
+weibo_show: true    # 是否显示最近微博内容
+weibo_pic: true     # 是否显示微博中的图片
+weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
+```</p>
+
+<p>其中的<code>weibo_uid</code>和<code>weibo_verifier</code>是从<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>生成的代码中取得的，其它则是显示设定。</p>
+
+<p>至此，搞定了微博的嵌入。</p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[第一篇用Octopress生成的日志]]></title>
     <link href="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/"/>
     <updated>2012-03-01T21:31:00+09:00</updated>
     <id>http://programus.github.com/blog/2012/03/01/first-post-by-octopress</id>
     <content type="html"><![CDATA[<p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
+
+<!--more-->
+
 
 <p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对[Ruby][]那么大意见，所以装了运行Jekyll的一切必需品，现学[Git][]（这个早就听说了，一直没用到所以没学）、[Jekyll][]、[Markdown][]……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
 
@@ -61,6 +178,9 @@ set LC_ALL=zh_CN.UTF-8
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
 
 [煎蛋]:			http://jandan.net								"煎蛋"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
 </p>
 ]]></content>
   </entry>

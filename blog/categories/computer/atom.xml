@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: octopress | 程序猎人的博客]]></title>
-  <link href="http://programus.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <title><![CDATA[Category: computer | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/computer/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
   <updated>2012-03-04T00:02:17+09:00</updated>
   <id>http://programus.github.com/</id>

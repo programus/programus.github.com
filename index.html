@@ -9,7 +9,7 @@
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="先是在知乎上发现了一个叫吕坤的人，顺着简介发现了他的博客。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。 我不像吕坤对Ruby那么大意见，所以装了运行Jekyll的一切必需品，现学Git（这个早就听说了，一直没用到所以没学）、Jekyll、Markdown……折腾了一个星期天， &hellip;">
+  <meta name="description" content="配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有Twitter等内容。因为墙的原因，Twitter始终使用起来不够方便，所以还是新浪微博用的更多。所以，就想在博客里弄一个微博的侧边栏。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,47 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/03/03/add-weibo-sidebar-into-octopress/">为Octopress博客追加新浪微博侧栏</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-03T21:43:00+09:00" pubdate data-updated="true">2012-03-03</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有Twitter等内容。因为<a href="http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" title="叹息之墙">墙</a>的原因，Twitter始终使用起来不够方便，所以还是<a href="http://weibo.com" title="新浪微博">新浪微博</a>用的更多。所以，就想在博客里弄一个<a href="http://weibo.com" title="新浪微博">微博</a>的侧边栏。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/03/03/add-weibo-sidebar-into-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/03/01/first-post-by-octopress/">第一篇用Octopress生成的日志</a></h1>
     
     
@@ -107,36 +148,12 @@
 
   <div class="entry-content"><p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
 
-<p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对<a href="http://www.ruby-lang.org" title="Ruby">Ruby</a>那么大意见，所以装了运行Jekyll的一切必需品，现学<a href="http://git-scm.com/" title="Git">Git</a>（这个早就听说了，一直没用到所以没学）、<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>、<a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a>……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
-
-<p>经过一番查找，发现是因为<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>运行时使用默认环境的地区编码信息，所以不识别UTF-8编码中的中文。从网上搜到Windows下可以使用<code>chcp</code>来改变语言编码，于是试了试<code>chcp 65001</code>，发现运行</p>
-
-<pre><code>jekyll --pygments --safe --auto --server
-</code></pre>
-
-<p>之后没有任何显示。遂放弃。</p>
-
-<p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set LANG=zh_CN.UTF-8
-</span><span class='line'>set LC_ALL=zh_CN.UTF-8</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
-
-<p>于是才有了此篇日志。</p>
-
-<hr />
-
-<p>本来用<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了<a href="http://octopress.org" title="Octopress">Octopress</a>这个东西。于是毅然变节，改投<a href="http://octopress.org" title="Octopress">Octopress</a>，于是有了现在的后半段。</p>
-
-<p><a href="http://octopress.org" title="Octopress">Octopress</a>比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>master</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
-
-<p>对<a href="http://git-scm.com/" title="Git">Git</a>还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/03/01/first-post-by-octopress/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -155,6 +172,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/03/03/add-weibo-sidebar-into-octopress/">为Octopress博客追加新浪微博侧栏</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/01/first-post-by-octopress/">第一篇用Octopress生成的日志</a>
       </li>
     
@@ -165,7 +186,14 @@
   <h1>新浪微博</h1>
   <ul id="weibo">
     <li>
-      <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1098907490&verifier=abd54ad9"></iframe>
+      <iframe 
+        width="100%" 
+        height="550" 
+        class="share_self" 
+        frameborder="0" 
+        scrolling="no" 
+        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1098907490&verifier=abd54ad9">
+      </iframe>
     </li>
   </ul>
 </section>
