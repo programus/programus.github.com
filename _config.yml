@@ -46,7 +46,8 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+# default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/twitter.html, asides/googleplus.html]
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -71,6 +72,15 @@ twitter_show_replies: false
 twitter_follow_button: true
 twitter_show_follower_count: false
 twitter_tweet_button: true
+
+# Weibo
+# Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
+weibo_uid: 1098907490
+weibo_verifier: abd54ad9
+weibo_fansline: 0	# How many lines for the fan list
+weibo_show: true	# Whether you want your weibo content to be shown
+weibo_pic: true		# Whether you want the pictures in weibo to be shown
+weibo_skin: 10		# Please refer to http://weibo.com/tool/weiboshow
 
 # Google +1
 google_plus_one: false
