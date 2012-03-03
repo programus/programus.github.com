@@ -6,9 +6,10 @@ comments: true
 categories: 
 - octopress
 - jekyll
-- 计算机
+- computer
 ---
 先是在知乎上发现了一个叫[吕坤][zhihu.lvkun]的人，顺着简介发现了[他的博客](http://lvkun.github.com/ "吕坤的github博客")。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。
+<!--more-->
 
 我不像[吕坤][zhihu.lvkun]对[Ruby][]那么大意见，所以装了运行Jekyll的一切必需品，现学[Git][]（这个早就听说了，一直没用到所以没学）、[Jekyll][]、[Markdown][]……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。
 
