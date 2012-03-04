@@ -77,13 +77,14 @@ twitter_tweet_button: true
 # Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
 weibo_uid: 1098907490
 weibo_verifier: abd54ad9
-weibo_fansline: 0	# How many lines for the fan list
-weibo_show: true	# Whether you want your weibo content to be shown
-weibo_pic: true		# Whether you want the pictures in weibo to be shown
-weibo_skin: 10		# Please refer to http://weibo.com/tool/weiboshow
+weibo_fansline: 0   # How many lines for the fan list
+weibo_show: true    # Whether you want your weibo content to be shown
+weibo_pic: true     # Whether you want the pictures in weibo to be shown
+weibo_skin: 10      # Please refer to http://weibo.com/tool/weiboshow
+weibo_share: true   # Whether show the sharing button
 
 # Google +1
-google_plus_one: false
+google_plus_one: true
 google_plus_one_size: medium
 
 # Google Plus Profile
