@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jekyll | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/jekyll/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-04T19:13:30+09:00</updated>
+  <updated>2012-03-04T21:00:49+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -12,6 +12,136 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[为Octopress追加[分享到微博]按钮]]></title>
+    <link href="http://programus.github.com/blog/2012/03/04/share-weibo-button/"/>
+    <updated>2012-03-04T20:11:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/04/share-weibo-button</id>
+    <content type="html"><![CDATA[<p>昨天加上了[微博][]的侧边栏。今天发现每篇微博下面还有一个<code>Tweet</code>按钮。还是那句话，在[墙][]后面，[Twitter][]用不到，所以[微博][]的分享按钮不可缺少。</p>
+
+<!--more-->
+
+
+<p>有了昨天的经验，今天也就没去网上查什么资料。直接去[新浪微博][]找到<a href="http://open.weibo.com/sharebutton" title="新浪微博分享按钮">分享按钮</a>的页面，生成一个按钮代码。</p>
+
+<p><div><script src='https://gist.github.com/1972564.js?file='></script>
+<noscript><pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+(function(){
+  var _w = 86 , _h = 50;
+  var param = {
+    url:location.href,
+    type:'6',
+    count:'1', /**是否显示分享数，1显示(可选)*/
+    appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+    title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
+    pic:'', /**分享图片的路径(可选)*/
+    ralateUid:'1098907490', /**关联用户的UID，分享微博会@该用户(可选)*/
+	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+    rnd:new Date().valueOf()
+  }
+  var temp = [];
+  for( var p in param ){
+    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+  }
+  document.write('&lt;iframe allowTransparency=&quot;true&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&amp;') + '&quot; width=&quot;'+ _w+'&quot; height=&quot;'+_h+'&quot;&gt;&lt;/iframe&gt;')
+})()
+&lt;/script&gt;</code></pre></noscript></div>
+</p>
+
+<p>仔细看看生成的按钮，虽然上面写了一大堆JavaScript，但实际有用的就是最后一行<code>document.write('...')</code>里面的HTML代码。但这里HTML的主要部分都是用JavaScript生成的。于是祭出网页分析神器——[Firebug][]，直接分析<a href="http://open.weibo.com/sharebutton" title="新浪微博分享按钮">分享按钮</a>页面里例子的HTML代码。从中提取出如下URL（为了便于阅读，格式做了调整）——</p>
+
+<p><code>
+http://hits.sinajs.cn/A1/weiboshare.html?
+  url=http%3A%2F%2Fopen.weibo.com%2Fsharebutton&amp;
+  appkey=&amp;
+  type=6&amp;
+  ralateUid=1098907490&amp;
+  language=zh_cn
+</code></p>
+
+<p>其中各个参数的意思，参看生成的JavaScript的注释，基本一目了然了。下一步，嵌入代码到博客下面的分享栏里。</p>
+
+<p>经过一番查找，分享栏的代码存储在<code>source/_includes/post/sharing.html</code>中。果断加入代码：</p>
+
+<p><div><script src='https://gist.github.com/1972657.js?file=sharing.html'></script>
+<noscript><pre><code>&lt;div class=&quot;sharing&quot;&gt;
+  {% if site.weibo_share %}
+  &lt;span&gt;
+  &lt;iframe 
+    width=&quot;86&quot; 
+    scrolling=&quot;no&quot; 
+    height=&quot;16&quot; 
+    frameborder=&quot;0&quot; 
+    src=
+      &quot;http://hits.sinajs.cn/A1/weiboshare.html?url={{ site.url }}{{ page.url }}&amp;amp;type=6&amp;amp;{% if site.weibo_uid %}ralateUid={{ site.weibo_uid }}&amp;amp;{% endif %}language=zh_cn&quot; allowtransparency=&quot;true&quot;&gt;
+  &lt;/iframe&gt;
+  &lt;/span&gt;
+  {% endif %}
+  {% if site.twitter_tweet_button %}
+  &lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot; data-url=&quot;{{ site.url }}{{ page.url }}&quot; data-via=&quot;{{ site.twitter_user }}&quot; data-counturl=&quot;{{ site.url }}{{ page.url }}&quot; &gt;Tweet&lt;/a&gt;
+  {% endif %}
+  {% if site.google_plus_one %}
+  &lt;div class=&quot;g-plusone&quot; data-size=&quot;{{ site.google_plus_one_size }}&quot;&gt;&lt;/div&gt;
+  {% endif %}
+  {% if site.facebook_like %}
+    &lt;div class=&quot;fb-like&quot; data-send=&quot;true&quot; data-width=&quot;450&quot; data-show-faces=&quot;false&quot;&gt;&lt;/div&gt;
+  {% endif %}
+&lt;/div&gt;
+&lt;hr style=&quot;border-bottom:1px dotted #bdbabd;height:1px;border-top:0px;border-left:0px;border-right:0px;&quot; /&gt;
+</code></pre></noscript></div>
+</p>
+
+<p>其中最后一行是自己调整了一下看着顺眼的格式。</p>
+
+<p>同时要在<code>_config.yml</code>文件中加入<code>weibo_share</code>的设定。</p>
+
+<p><div><script src='https://gist.github.com/1972657.js?file=_config.yml'></script>
+<noscript><pre><code># Weibo
+# Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
+weibo_uid: 1098907490
+weibo_verifier: abd54ad9
+weibo_fansline: 0   # How many lines for the fan list
+weibo_show: true    # Whether you want your weibo content to be shown
+weibo_pic: true     # Whether you want the pictures in weibo to be shown
+weibo_skin: 10      # Please refer to http://weibo.com/tool/weiboshow
+weibo_share: true   # Whether show the sharing button
+</code></pre></noscript></div>
+</p>
+
+<p>最后，为了更换主题时不会出问题，对<code>.theme/&lt;所用的主题名&gt;/source/_includes/post/sharing.html</code>也做了相应的修改。</p>
+
+<p>最后，生成网页、启动服务器测试——</p>
+
+<p><code>
+rake generate
+rake preview
+</code></p>
+
+<p>查看预览网页<a href="http://localhost:4000">http://localhost:4000</a>……<strong>按钮加入成功</strong>！</p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+[Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为Octopress博客追加新浪微博侧栏]]></title>
@@ -70,13 +200,20 @@
 
 <p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题名&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
 
-<p><div><script src='https://gist.github.com/1966517.js?file='></script>
+<p><div><script src='https://gist.github.com/1966517.js?file=weibo.html'></script>
 <noscript><pre><code>{% if site.weibo_uid %}
 &lt;section&gt;
   &lt;h1&gt;新浪微博&lt;/h1&gt;
   &lt;ul id=&quot;weibo&quot;&gt;
     &lt;li&gt;
-      &lt;iframe width=&quot;100%&quot; height=&quot;550&quot; class=&quot;share_self&quot;  frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;http://widget.weibo.com/weiboshow/index.php?width=0&amp;height=550&amp;ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&amp;speed=0&amp;skin={{weibo_skin}}&amp;isTitle=0&amp;noborder=1&amp;isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&amp;isFans={{weibo_fansline}}&amp;uid={{site.weibo_uid}}&amp;verifier={{site.weibo_verifier}}&quot;&gt;&lt;/iframe&gt;
+      &lt;iframe 
+        width=&quot;100%&quot; 
+        height=&quot;550&quot; 
+        class=&quot;share_self&quot; 
+        frameborder=&quot;0&quot; 
+        scrolling=&quot;no&quot; 
+        src=&quot;http://widget.weibo.com/weiboshow/index.php?width=0&amp;height=550&amp;ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&amp;speed=0&amp;skin={{weibo_skin}}&amp;isTitle=0&amp;noborder=1&amp;isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&amp;isFans={{weibo_fansline}}&amp;uid={{site.weibo_uid}}&amp;verifier={{site.weibo_verifier}}&quot;&gt;
+      &lt;/iframe&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/section&gt;
@@ -86,22 +223,24 @@
 
 <p>同时，在<code>_config.yml</code>中加入相关设定——</p>
 
-<p>```
-default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]</p>
+<p><div><script src='https://gist.github.com/1966517.js?file=_config.yml'></script>
+<noscript><pre><code># 其它内容....
 
-<h1>其它内容....</h1>
+default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
 
-<h1>Weibo</h1>
+# 其它内容....
 
-<h1>Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier.</h1>
-
-<p>weibo_uid: 1098907490
+# Weibo
+# Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
+weibo_uid: 1098907490
 weibo_verifier: abd54ad9
 weibo_fansline: 0   # 粉丝显示多少行
 weibo_show: true    # 是否显示最近微博内容
 weibo_pic: true     # 是否显示微博中的图片
 weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
-```</p>
+
+# 其它内容....</code></pre></noscript></div>
+</p>
 
 <p>其中的<code>weibo_uid</code>和<code>weibo_verifier</code>是从<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>生成的代码中取得的，其它则是显示设定。</p>
 
@@ -116,6 +255,8 @@ weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀
 [Google]:		http://www.google.com							"Google"
 [Yahoo]:		http://www.yahoo.com							"Yahoo"
 [Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
 
 [Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
@@ -149,10 +290,10 @@ weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀
 
 <p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
 
-<p><code>
-set LANG=zh_CN.UTF-8
-set LC_ALL=zh_CN.UTF-8
-</code></p>
+<p><div><script src='https://gist.github.com/1972602.js?file='></script>
+<noscript><pre><code>set LANG=zh_CN.UTF-8
+set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
+</p>
 
 <p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
 
@@ -175,6 +316,8 @@ set LC_ALL=zh_CN.UTF-8
 [Google]:		http://www.google.com							"Google"
 [Yahoo]:		http://www.yahoo.com							"Yahoo"
 [Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
 
 [Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
