@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: software | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/software/atom.xml" rel="self"/>
+  <link href="http://programus.github.com/"/>
+  <updated>2012-03-04T23:39:59+09:00</updated>
+  <id>http://programus.github.com/</id>
+  <author>
+    <name><![CDATA[程序猎人]]></name>
+    <email><![CDATA[programus@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TinyCountdown - 小巧纯粹的倒计时软件]]></title>
+    <link href="http://programus.github.com/blog/2010/11/15/tiny-countdown/"/>
+    <updated>2010-11-15T23:37:00+09:00</updated>
+    <id>http://programus.github.com/blog/2010/11/15/tiny-countdown</id>
+    <content type="html"><![CDATA[<p>自从工作以后，一直面临一个问题：开会超时。而作为IT公司的会议，又有一个常见的情况——共享或投影屏幕。</p>
+
+<p>基于此，在上周的一次会议上，我在共享屏幕的同时，挂上了一个倒计时程序。效果还不错。毕竟发言者在众目睽睽之下超时实在很没面子。但是，那个计时程序上面的很多按钮实在太占地方，在共享屏幕的时候常常遮挡住必要内容，导致不得不移来移去。于是乎，作为IT从业人员，再次热血沸腾，写了一个更加小巧的倒计时软件。既然小巧是最主要特点，于是便命名为——</p>
+
+<p><strong>TinyCountdown</strong></p>
+
+<!--more-->
+
+
+<p><img src="http://i141.photobucket.com/albums/r60/programus/software/TinyCountdown_preview.gif" title="screenshot" ></p>
+
+<p>程序运行后，没有任何累赘的标题栏、按钮、菜单等。唯一有效内容之外的累赘就是一个为了方便改变窗口大小的窗口边框。（好吧，我承认技术上去掉这个也是可能的，我在偷懒……）</p>
+
+<p>有君问：啥都没有，怎么操控？</p>
+
+<p>答曰：鼠标 或 键盘，组合更悠然。</p>
+
+<p>操作说明窗口会在鼠标飘过主窗口时出现，为了软件的通用性，做成了英文的。</p>
+
+<p>现将中文概述如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">功能             </th>
+<th align="left"> 鼠标操作       </th>
+<th align="left"> 键盘操作 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">开始倒计时       </td>
+<td align="left">单击左键        </td>
+<td align="left">空格</td>
+</tr>
+<tr>
+<td align="left">暂停倒计时       </td>
+<td align="left">单击左键        </td>
+<td align="left">空格</td>
+</tr>
+<tr>
+<td align="left">重置倒计时       </td>
+<td align="left">单击左键(停止时)</td>
+<td align="left">Backspace</td>
+</tr>
+<tr>
+<td align="left">设置倒计时时间    </td>
+<td align="left">单击右键       </td>
+<td align="left">回车</td>
+</tr>
+<tr>
+<td align="left">关闭程序          </td>
+<td align="left">将主窗口缩至极小</td>
+<td align="left">ESC</td>
+</tr>
+<tr>
+<td align="left">帮助窗口显示/隐藏 </td>
+<td align="left">单击中键        </td>
+<td align="left">F1</td>
+</tr>
+<tr>
+<td align="left">设置主窗口总在最前</td>
+<td align="left">               </td>
+<td align="left">HOME</td>
+</tr>
+<tr>
+<td align="left">取消主窗口总在最前</td>
+<td align="left">               </td>
+<td align="left">END</td>
+</tr>
+<tr>
+<td align="left">全屏幕切换        </td>
+<td align="left">               </td>
+<td align="left">M</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>其他隐藏操作，请自行摸索。</p>
+
+<p>为保证程序的小巧和绿色，程序不会保存任何设置，默认倒计时时间为15分钟，默认开启帮助窗口，默认程序出现在窗口右上角，默认程序为总在最前。程序内置内存优化机制，平均占用内存在1MB左右，内存占用峰值不足2MB。</p>
+
+<p>希望有习惯整洁小巧的人士喜欢。</p>
+
+<p>忘了说了，本程序只能在Windows平台上运行，对不起Mac和Linux等的兄弟了。望不要介意。</p>
+
+<p>下载地址：</p>
+
+<p><a href="http://code.google.com/p/tinytool/downloads/detail?name=TinyCountdown.exe">http://code.google.com/p/tinytool/downloads/detail?name=TinyCountdown.exe</a></p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+[Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+</p>
+]]></content>
+  </entry>
+  
+</feed>
