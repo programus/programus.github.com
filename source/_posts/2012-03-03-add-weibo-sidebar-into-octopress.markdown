@@ -52,24 +52,11 @@ categories:
 
 仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个`weibo.html`，放到了`source/_includes/asides`下面。貌似在`.theme/<所用的主题名>/source/_includes/asides`下面放着更好，因为切换主题时不会丢失。
 
-{% gist 1966517 %}
+{% gist 1966517 weibo.html %}
 
 同时，在`_config.yml`中加入相关设定——
 
-```
-default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
-
-# 其它内容....
-
-# Weibo
-# Please refer to http://weibo.com/tool/weiboshow to get your uid and verifier. 
-weibo_uid: 1098907490
-weibo_verifier: abd54ad9
-weibo_fansline: 0   # 粉丝显示多少行
-weibo_show: true    # 是否显示最近微博内容
-weibo_pic: true     # 是否显示微博中的图片
-weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
-```
+{% gist 1966517 _config.yml %}
 
 其中的`weibo_uid`和`weibo_verifier`是从[微博秀][]生成的代码中取得的，其它则是显示设定。
 

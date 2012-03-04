@@ -21,10 +21,7 @@ categories:
 
 继续查，发现哪怕在Windows下，只要设置`LANG`和`LC_ALL`后，便可以设置的编码运行。于是
 
-```
-set LANG=zh_CN.UTF-8
-set LC_ALL=zh_CN.UTF-8
-```
+{% gist 1972602 %}
 
 然后再次运行`jekyll`，**正常了！**
 
