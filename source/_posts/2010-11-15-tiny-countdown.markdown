@@ -8,6 +8,7 @@ categories:
 - software
 - c++
 - windows
+styles: [data-table]
 ---
 自从工作以后，一直面临一个问题：开会超时。而作为IT公司的会议，又有一个常见的情况——共享或投影屏幕。
 
