@@ -1,0 +1,19 @@
+table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}
+
+th, td {
+  border-style:dashed;
+  border-width:1px;
+  border-color:#e7e3e7;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+th {
+  border-style:solid;
+  font-weight:bold;
+  background-color:#f7f3f7
+}
