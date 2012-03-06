@@ -15,5 +15,5 @@ th, td {
 th {
   border-style:solid;
   font-weight:bold;
-  background-color:#f7f3f7
+  background: url("/images/noise.png?1330434582") repeat scroll left top #F7F3F7;
 }
