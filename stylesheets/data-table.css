@@ -17,3 +17,15 @@ th {
   font-weight:bold;
   background: url("/images/noise.png?1330434582") repeat scroll left top #F7F3F7;
 }
+
+th[align="left"], td[align="left"] {
+  text-align:left;
+}
+
+th[align="right"], td[align="right"] {
+  text-align:right;
+}
+
+th[align="center"], td[align="center"] {
+  text-align:center;
+}
