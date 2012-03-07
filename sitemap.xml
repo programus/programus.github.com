@@ -1,6 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://programus.github.com/blog/2010/11/15/tiny-countdown/</loc>
+        <lastmod>2012-03-06T22:39:29+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://programus.github.com/blog/2012/03/01/first-post-by-octopress/</loc>
+        <lastmod>2012-03-04T20:38:05+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress/</loc>
+        <lastmod>2012-03-04T20:50:25+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://programus.github.com/blog/2012/03/04/share-weibo-button/</loc>
+        <lastmod>2012-03-04T20:58:58+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/</loc>
         <lastmod>2012-03-08T00:03:03+09:00</lastmod>
     </url>
