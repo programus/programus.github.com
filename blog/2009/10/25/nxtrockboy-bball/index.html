@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TinyCountdown - 小巧纯粹的倒计时软件 - 程序猎人的博客</title>
+  <title>NXTRockBoy - 原创游戏机 & BBall - 其上的第一个游戏 - 程序猎人的博客</title>
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="自从工作以后，一直面临一个问题：开会超时。而作为IT公司的会议，又有一个常见的情况——共享或投影屏幕。 基于此，在上周的一次会议上，我在共享屏幕的同时，挂上了一个倒计时程序。效果还不错。毕竟发言者在众目睽睽之下超时实在很没面子。但是，那个计时程序上面的很多按钮实在太占地方， &hellip;">
+  <meta name="description" content="利用近一个月的业余时间，终于成功地用NXT 8547搭建起了原创的摇摆游戏机NXTRockBoy，并开发完了世上第一款NXTRockBoy游戏——BBall。 NXTRockBoy是我用LEGO Mindstorms NXT 8547机器人套装搭建而成的一款原创游戏机。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,11 +18,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://programus.github.com/blog/2010/11/15/tiny-countdown">
+  <link rel="canonical" href="http://programus.github.com/blog/2009/10/25/nxtrockboy-bball">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -83,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">TinyCountdown - 小巧纯粹的倒计时软件</h1>
+      <h1 class="entry-title">NXTRockBoy - 原创游戏机 & BBall - 其上的第一个游戏</h1>
     
     
       <p class="meta">
@@ -99,103 +97,42 @@
   
 
 
-<time datetime="2010-11-15T23:37:00+09:00" pubdate data-updated="true">2010-11-15</time>
+<time datetime="2009-10-25T22:26:00+09:00" pubdate data-updated="true">2009-10-25</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>自从工作以后，一直面临一个问题：开会超时。而作为IT公司的会议，又有一个常见的情况——共享或投影屏幕。</p>
-
-<p>基于此，在上周的一次会议上，我在共享屏幕的同时，挂上了一个倒计时程序。效果还不错。毕竟发言者在众目睽睽之下超时实在很没面子。但是，那个计时程序上面的很多按钮实在太占地方，在共享屏幕的时候常常遮挡住必要内容，导致不得不移来移去。于是乎，作为IT从业人员，再次热血沸腾，写了一个更加小巧的倒计时软件。既然小巧是最主要特点，于是便命名为——</p>
-
-<p><strong>TinyCountdown</strong></p>
+<div class="entry-content"><p>利用近一个月的业余时间，终于成功地用NXT 8547搭建起了原创的摇摆游戏机NXTRockBoy，并开发完了世上第一款NXTRockBoy游戏——BBall。</p>
 
 <!--more-->
 
 
-<p><img src="http://i141.photobucket.com/albums/r60/programus/software/TinyCountdown_preview.gif" title="screenshot" ></p>
+<p>NXTRockBoy是我用LEGO Mindstorms NXT 8547机器人套装搭建而成的一款原创游戏机。他最大的特点是通过摇摆来作为主要输入。有人说Wii的输入也是通过摇摆，而且是三维方向的摇摆，NXTRockBoy有什么创新？Wii也是我很喜欢的游戏机，在玩NXT之前，常常在玩，但是当你玩Wii的时候，只是在摇摆游戏棒，电视不会跟着摇。而我的NXTRockBoy是要摇晃包含显示屏在内的游戏机本体，所以产生的效果就是屏幕及屏幕里面的内容都会随着摇摆进行运动。</p>
 
-<p>程序运行后，没有任何累赘的标题栏、按钮、菜单等。唯一有效内容之外的累赘就是一个为了方便改变窗口大小的窗口边框。（好吧，我承认技术上去掉这个也是可能的，我在偷懒……）</p>
+<p>那么，这种输入特性有什么好玩的？</p>
 
-<p>有君问：啥都没有，怎么操控？</p>
+<p>那就得谈谈这第一款游戏——BBall了。BBall，要是一定要有一个中文名字的话，我认为“蹦蹦球”应该是个很贴切的名字。因为游戏的主角就是一个弹力超强的小球。弹力强到什么程度呢？如果放任不管地让他去上下弹啊弹，他会越蹦越高，最大速度（势能最低时）越来越快。这球要是出现在现实世界中，恐怕永动机就不再是神话了。好吧，实际上，这其实是程序在微分运算时的精度不足引起的，所以我在程序里面加入了极限能量控制。小球动能和势能的总和不能超过一个既定的值，如果超过，则强行降低速度。</p>
 
-<p>答曰：鼠标 或 键盘，组合更悠然。</p>
+<p>一不小心把话扯远了，现在拉回来。这个小球就这么欢快地在屏幕里面蹦啊蹦，碰到屏幕的边缘便反弹，碰到任何黑色的障碍也反弹。小球最喜欢的就是去吃豆豆。屏幕里总会有一个不一定在什么位置的豆豆等着他。但是小球自己无法有意识地向豆豆移动，所以他需要玩家的帮助。</p>
 
-<p>操作说明窗口会在鼠标飘过主窗口时出现，为了软件的通用性，做成了英文的。</p>
+<p>小球除了反弹，在运动过程中只受到一个力——重力。就是物理书里面说的那个竖直向下的重力，那个不会随着屏幕的旋转而旋转的重力！好，现在就要说到摇摆输入的好玩之处了：比如说，当小球在天空中，达到了最高点，势能最大，动能为零（也就意味着速度为零），这时我们旋转了游戏机本体，那么小球就不会再沿着与屏幕侧边平行的方向下落，而是沿着与自然界的竖直方向相同的方向下落，而相对于屏幕，就是一个倾斜的方向。当然，举一个动能为零的例子是为了简化说明，如果动能不为零，那么就是抛物线的一个局部。这样，当小球与屏幕底边接触时，它的速度方向与底边的夹角就不再是直角，而是某个特定的角度。那么反弹的时候就会向相对于底边倾斜的方向反弹（与入射角的和为180°）。通过这样的角度变化实现了小球运动方向与速度的调节。</p>
 
-<p>现将中文概述如下：</p>
+<p>另一方面，因为小球的坐标及速度是与屏幕黏着在一起的，所以小球实际上是无法实现能量守恒的，这样速度常常会出现极具戏剧性的变化。</p>
 
-<table>
-<thead>
-<tr>
-<th align="left">功能             </th>
-<th align="left"> 鼠标操作       </th>
-<th align="left"> 键盘操作 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">开始倒计时       </td>
-<td align="left">单击左键        </td>
-<td align="left">空格</td>
-</tr>
-<tr>
-<td align="left">暂停倒计时       </td>
-<td align="left">单击左键        </td>
-<td align="left">空格</td>
-</tr>
-<tr>
-<td align="left">重置倒计时       </td>
-<td align="left">单击左键(停止时)</td>
-<td align="left">Backspace</td>
-</tr>
-<tr>
-<td align="left">设置倒计时时间    </td>
-<td align="left">单击右键       </td>
-<td align="left">回车</td>
-</tr>
-<tr>
-<td align="left">关闭程序          </td>
-<td align="left">将主窗口缩至极小</td>
-<td align="left">ESC</td>
-</tr>
-<tr>
-<td align="left">帮助窗口显示/隐藏 </td>
-<td align="left">单击中键        </td>
-<td align="left">F1</td>
-</tr>
-<tr>
-<td align="left">设置主窗口总在最前</td>
-<td align="left">               </td>
-<td align="left">HOME</td>
-</tr>
-<tr>
-<td align="left">取消主窗口总在最前</td>
-<td align="left">               </td>
-<td align="left">END</td>
-</tr>
-<tr>
-<td align="left">全屏幕切换        </td>
-<td align="left">               </td>
-<td align="left">M</td>
-</tr>
-</tbody>
-</table>
+<p>好吧。我知道我上面说了那么多，恐怕你也不一定能看懂。毕竟我写自然坐标与屏幕坐标变换模块的时候，自己也头疼了好几天，草纸也用了好几张，早已忘记很久的正弦定理和余弦定理又被我记熟了。所以，对不懂的人，我非常理解和同情，故此我留下了下面的视频。希望能帮助大家理解和愉悦各位的身心。</p>
 
+<p><embed src="http://www.tudou.com/v/9-eFmGmNbZ8/&resourceId=0_05_02_99/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed></p>
 
-<p>其他隐藏操作，请自行摸索。</p>
+<p><a href="http://www.tudou.com/programs/view/9-eFmGmNbZ8/?resourceId=0_06_02_99">土豆网链接</a></p>
 
-<p>为保证程序的小巧和绿色，程序不会保存任何设置，默认倒计时时间为15分钟，默认开启帮助窗口，默认程序出现在窗口右上角，默认程序为总在最前。程序内置内存优化机制，平均占用内存在1MB左右，内存占用峰值不足2MB。</p>
+<p>独乐乐不如与人乐乐，与人乐乐不如众乐乐。在此共享一下详细的构件图和源代码：</p>
 
-<p>希望有习惯整洁小巧的人士喜欢。</p>
+<ul>
+<li><a href="http://code.google.com/p/nxtprojects/wiki/BBall">http://code.google.com/p/nxtprojects/wiki/BBall</a></li>
+</ul>
 
-<p>忘了说了，本程序只能在Windows平台上运行，对不起Mac和Linux等的兄弟了。望不要介意。</p>
-
-<p>下载地址：</p>
-
-<p><a href="http://code.google.com/p/tinytool/downloads/detail?name=TinyCountdown.exe">http://code.google.com/p/tinytool/downloads/detail?name=TinyCountdown.exe</a></p>
 </div>
 
 
@@ -218,12 +155,12 @@
   
 
 
-<time datetime="2010-11-15T23:37:00+09:00" pubdate data-updated="true">2010-11-15</time>
+<time datetime="2009-10-25T22:26:00+09:00" pubdate data-updated="true">2009-10-25</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-/'>c++</a>, <a class='category' href='/blog/categories/computer/'>computer</a>, <a class='category' href='/blog/categories/software/'>software</a>, <a class='category' href='/blog/categories/windows/'>windows</a>
+    <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/lego/'>lego</a>, <a class='category' href='/blog/categories/nxt/'>nxt</a>, <a class='category' href='/blog/categories/robot/'>robot</a>
   
 </span>
 
@@ -239,12 +176,12 @@
     height="16" 
     frameborder="0" 
     src=
-      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2010/11/15/tiny-countdown/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
+      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
   </iframe>
   </span>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2010/11/15/tiny-countdown/" data-via="programus" data-counturl="http://programus.github.com/blog/2010/11/15/tiny-countdown/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/" data-via="programus" data-counturl="http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -256,10 +193,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2009/12/25/nxtrockboy-dropball/" title="Previous Post: NXTRockBoy上的第二个原创游戏——Drop Ball">&laquo; NXTRockBoy上的第二个原创游戏——Drop Ball</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/01/24/what-is-this-machine/" title="Next Post: 这是什么机器？">这是什么机器？ &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2009/12/25/nxtrockboy-dropball/" title="Next Post: NXTRockBoy上的第二个原创游戏——Drop Ball">NXTRockBoy上的第二个原创游戏——Drop Ball &raquo;</a>
       
     </p>
   </footer>
@@ -396,8 +331,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://programus.github.com/blog/2010/11/15/tiny-countdown/';
-        var disqus_url = 'http://programus.github.com/blog/2010/11/15/tiny-countdown/';
+        var disqus_identifier = 'http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/';
+        var disqus_url = 'http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/';
         var disqus_script = 'embed.js';
       
     (function () {

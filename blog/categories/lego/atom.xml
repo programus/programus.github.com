@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lego | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/lego/atom.xml" rel="self"/>
+  <link href="http://programus.github.com/"/>
+  <updated>2012-03-08T21:06:21+09:00</updated>
+  <id>http://programus.github.com/</id>
+  <author>
+    <name><![CDATA[程序猎人]]></name>
+    <email><![CDATA[programus@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[这是什么机器？]]></title>
+    <link href="http://programus.github.com/blog/2011/01/24/what-is-this-machine/"/>
+    <updated>2011-01-24T21:32:00+09:00</updated>
+    <id>http://programus.github.com/blog/2011/01/24/what-is-this-machine</id>
+    <content type="html"><![CDATA[<p>请看视频（记得开声音）：</p>
+
+<!--more-->
+
+
+<p><embed src="http://player.youku.com/player.php/sid/XMjM1NDk2Njgw/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
+
+<p><a href="http://v.youku.com/v_show/id_XMjM1NDk2Njgw.html">视频地址</a></p>
+
+<p>{% include links %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NXTRockBoy上的第二个原创游戏——Drop Ball]]></title>
+    <link href="http://programus.github.com/blog/2009/12/25/nxtrockboy-dropball/"/>
+    <updated>2009-12-25T11:21:00+09:00</updated>
+    <id>http://programus.github.com/blog/2009/12/25/nxtrockboy-dropball</id>
+    <content type="html"><![CDATA[<p>前一段时间工作很忙，本职工作很忙。后来，集中精力制作了第二款NXTRockBoy的游戏——Drop Ball。顺便说一下，第一款游戏在<a href="{%%20post_url%202009-10-25-nxtrockboy-bball%20%}">这里</a>。</p>
+
+<!--more-->
+
+
+<p>Drop Ball是一款什么样的游戏呢？</p>
+
+<p>大家记得有一个男人系列的游戏吧。其中有一个是“是男人就下一百层”。好，Drop Ball就是这个游戏的摇摆游戏机版。只不过把那个倒霉的小男孩换成了我们的主角——小黑球。玩那个游戏按箭头按到手疼的同学们，现在可以换一种方式了。</p>
+
+<p>在这个游戏中，继续发挥了NXTRockBoy的摇摆操作特性，小球仍然是受到重力的影响，而且依旧具有惯性。不要以为你把NXTRockBoy往左转，小球就往左跑，如果他之前有一个右方向的速度，他是要先进行减速的。所以，游戏一如既往地很有难度，不过可玩性提高了很多。</p>
+
+<p>另外，作为第二个游戏，总要有些突破。这个游戏中增加了两个重要特性——</p>
+
+<p>第一个——背景音乐支持！在不影响小球那个滴滴答答的音效的基础上增加了背景音乐支持。系统中内置了三段音乐——Final Countdown、Smooth Criminal、变形金刚动画片主题曲。如果你想要自定义，只要读读我的<a href="http://code.google.com/p/nxtprojects/wiki/NXTUtils">帮助</a>中的音乐支持部分，自己写一段代码即可。</p>
+
+<p>第二个——环境光支持！如果有人组装了NXTRockBoy，一定对上面安装的颜色/光传感器和超声传感器感到奇怪。因为上一个游戏压根没用到这两个东西。这一款游戏用到了颜色/光传感器（虽然超声传感器还是遭到冷遇）。游戏中平台的相关参数会根据游戏机所在地的环境光的强度改变。</p>
+
+<p>游戏有两个模式——<code>|</code>模式和<code>-</code>模式。<code>|</code>模式下，光线强，则平台间距小；<code>-</code>模式下光线强，则平台宽度大。</p>
+
+<p>好，看了这么多，大家一定期待着看视频了。那就如期上视频！</p>
+
+<p><embed src="http://player.youku.com/player.php/sid/XMTM5OTEwNDA0/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
+
+<p><a href="http://v.youku.com/v_show/id_XMTM5OTEwNDA0.html">视频网址</a></p>
+
+<p>最后，也是最重要的：</p>
+
+<p>搭建图及程序下载和说明，请看这里：</p>
+
+<p><a href="http://code.google.com/p/nxtprojects/wiki/DropBall">http://code.google.com/p/nxtprojects/wiki/DropBall</a></p>
+
+<p>{% include links %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NXTRockBoy - 原创游戏机 & BBall - 其上的第一个游戏]]></title>
+    <link href="http://programus.github.com/blog/2009/10/25/nxtrockboy-bball/"/>
+    <updated>2009-10-25T22:26:00+09:00</updated>
+    <id>http://programus.github.com/blog/2009/10/25/nxtrockboy-bball</id>
+    <content type="html"><![CDATA[<p>利用近一个月的业余时间，终于成功地用NXT 8547搭建起了原创的摇摆游戏机NXTRockBoy，并开发完了世上第一款NXTRockBoy游戏——BBall。</p>
+
+<!--more-->
+
+
+<p>NXTRockBoy是我用LEGO Mindstorms NXT 8547机器人套装搭建而成的一款原创游戏机。他最大的特点是通过摇摆来作为主要输入。有人说Wii的输入也是通过摇摆，而且是三维方向的摇摆，NXTRockBoy有什么创新？Wii也是我很喜欢的游戏机，在玩NXT之前，常常在玩，但是当你玩Wii的时候，只是在摇摆游戏棒，电视不会跟着摇。而我的NXTRockBoy是要摇晃包含显示屏在内的游戏机本体，所以产生的效果就是屏幕及屏幕里面的内容都会随着摇摆进行运动。</p>
+
+<p>那么，这种输入特性有什么好玩的？</p>
+
+<p>那就得谈谈这第一款游戏——BBall了。BBall，要是一定要有一个中文名字的话，我认为“蹦蹦球”应该是个很贴切的名字。因为游戏的主角就是一个弹力超强的小球。弹力强到什么程度呢？如果放任不管地让他去上下弹啊弹，他会越蹦越高，最大速度（势能最低时）越来越快。这球要是出现在现实世界中，恐怕永动机就不再是神话了。好吧，实际上，这其实是程序在微分运算时的精度不足引起的，所以我在程序里面加入了极限能量控制。小球动能和势能的总和不能超过一个既定的值，如果超过，则强行降低速度。</p>
+
+<p>一不小心把话扯远了，现在拉回来。这个小球就这么欢快地在屏幕里面蹦啊蹦，碰到屏幕的边缘便反弹，碰到任何黑色的障碍也反弹。小球最喜欢的就是去吃豆豆。屏幕里总会有一个不一定在什么位置的豆豆等着他。但是小球自己无法有意识地向豆豆移动，所以他需要玩家的帮助。</p>
+
+<p>小球除了反弹，在运动过程中只受到一个力——重力。就是物理书里面说的那个竖直向下的重力，那个不会随着屏幕的旋转而旋转的重力！好，现在就要说到摇摆输入的好玩之处了：比如说，当小球在天空中，达到了最高点，势能最大，动能为零（也就意味着速度为零），这时我们旋转了游戏机本体，那么小球就不会再沿着与屏幕侧边平行的方向下落，而是沿着与自然界的竖直方向相同的方向下落，而相对于屏幕，就是一个倾斜的方向。当然，举一个动能为零的例子是为了简化说明，如果动能不为零，那么就是抛物线的一个局部。这样，当小球与屏幕底边接触时，它的速度方向与底边的夹角就不再是直角，而是某个特定的角度。那么反弹的时候就会向相对于底边倾斜的方向反弹（与入射角的和为180°）。通过这样的角度变化实现了小球运动方向与速度的调节。</p>
+
+<p>另一方面，因为小球的坐标及速度是与屏幕黏着在一起的，所以小球实际上是无法实现能量守恒的，这样速度常常会出现极具戏剧性的变化。</p>
+
+<p>好吧。我知道我上面说了那么多，恐怕你也不一定能看懂。毕竟我写自然坐标与屏幕坐标变换模块的时候，自己也头疼了好几天，草纸也用了好几张，早已忘记很久的正弦定理和余弦定理又被我记熟了。所以，对不懂的人，我非常理解和同情，故此我留下了下面的视频。希望能帮助大家理解和愉悦各位的身心。</p>
+
+<p><embed src="http://www.tudou.com/v/9-eFmGmNbZ8/&resourceId=0_05_02_99/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed></p>
+
+<p><a href="http://www.tudou.com/programs/view/9-eFmGmNbZ8/?resourceId=0_06_02_99">土豆网链接</a></p>
+
+<p>独乐乐不如与人乐乐，与人乐乐不如众乐乐。在此共享一下详细的构件图和源代码：</p>
+
+<ul>
+<li><a href="http://code.google.com/p/nxtprojects/wiki/BBall">http://code.google.com/p/nxtprojects/wiki/BBall</a></li>
+</ul>
+
+
+<p>{% include links %}</p>
+]]></content>
+  </entry>
+  
+</feed>
