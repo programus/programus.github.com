@@ -4,7 +4,7 @@
   <title><![CDATA[程序猎人的博客]]></title>
   <link href="http://programus.github.com/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-08T00:09:38+09:00</updated>
+  <updated>2012-03-08T13:57:38+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -18,7 +18,7 @@
     <link href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/"/>
     <updated>2012-03-07T21:56:00+09:00</updated>
     <id>http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress</id>
-    <content type="html"><![CDATA[<p>昨天恢复了一个<a href="../../../../2010/11/15/tiny-countdown/">旧博客</a>，里面包含了一个数据表格。</p>
+    <content type="html"><![CDATA[<p>昨天恢复了一个<a href="http://programus.github.com/blog/2010/11/15/tiny-countdown/">旧博客</a>，里面包含了一个数据表格。</p>
 
 <p>但<a href="http://octopress.org" title="Octopress">Octopress</a>的默认表格是不具有边框的，在看数据表格时会很难看。</p>
 

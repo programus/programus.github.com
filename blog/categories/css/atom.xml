@@ -4,7 +4,7 @@
   <title><![CDATA[Category: css | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-08T00:09:38+09:00</updated>
+  <updated>2012-03-08T13:57:38+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -18,7 +18,7 @@
     <link href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/"/>
     <updated>2012-03-07T21:56:00+09:00</updated>
     <id>http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress</id>
-    <content type="html"><![CDATA[<p>昨天恢复了一个<a href="../../../../2010/11/15/tiny-countdown/">旧博客</a>，里面包含了一个数据表格。</p>
+    <content type="html"><![CDATA[<p>昨天恢复了一个<a href="{%%20post_url%202010-11-15-tiny-countdown%20%}">旧博客</a>，里面包含了一个数据表格。</p>
 
 <p>但[Octopress][]的默认表格是不具有边框的，在看数据表格时会很难看。</p>
 
@@ -35,38 +35,11 @@
 
 <p>看来只有覆盖它们了。于是写了一个<code>data-table.css</code>，同样放在<code>source/stylesheets</code>下面。</p>
 
-<p><div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
-<noscript><pre><code>table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#e7e3e7;
-}
-
-th, td {
-  border-style:dashed;
-  border-width:1px;
-  border-color:#e7e3e7;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-th {
-  border-style:solid;
-  font-weight:bold;
-  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
-}
-</code></pre></noscript></div>
-</p>
+<p>{% gist 1993032 data-table.css %}</p>
 
 <p>然后找到引入<code>screen.css</code>的文件，在其后引入<code>data-table.css</code>。这个文件是<code>source/_includes/head.html</code>。但为了保证没有数据表格的博客还能继续使用原本的表格风格，在里面加了少许条件。</p>
 
-<p><div><script src='https://gist.github.com/1993032.js?file=head.html'></script>
-<noscript><pre><code>  &lt;link href=&quot;{{ root_url }}/stylesheets/screen.css&quot; media=&quot;screen, projection&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-  {% if page.styles contains 'data-table' %}
-  &lt;link href=&quot;{{ root_url }}/stylesheets/data-table.css&quot; media=&quot;screen, projection&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
-  {% endif %}
-</code></pre></noscript></div>
-</p>
+<p>{% gist 1993032 head.html %}</p>
 
 <p>这样，只要在博客文件的<a href="https://github.com/mojombo/jekyll/wiki/yaml-front-matter"><code>yaml front matter</code></a>部分里面加入<code>styles: [data-table]</code>，就可以让数据表格用的表格风格生效了。</p>
 
@@ -118,26 +91,7 @@ th {
 
 <p>其中的左右对齐，取决于表头下面一行中的冒号的位置。</p>
 
-<p>
-[Ruby]:			http://www.ruby-lang.org						"Ruby"
-[git]:			http://git-scm.com/								"Git"
-[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
-[Octopress]:	http://octopress.org							"Octopress"
-[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
-[Google]:		http://www.google.com							"Google"
-[Yahoo]:		http://www.yahoo.com							"Yahoo"
-[Twitter]:		http://twitter.com/								"Twitter"
-
-[Firebug]:		http://getfirebug.com/							"Firebug"
-
-[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
-[维基百科]:		http://zh.wikipedia.org							"维基中文"
-
-[煎蛋]:			http://jandan.net								"煎蛋"
-[新浪微博]:		http://weibo.com								"新浪微博"
-[微博]:			http://weibo.com								"新浪微博"
-[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
-</p>
+<p>{% include links %}</p>
 ]]></content>
   </entry>
   
