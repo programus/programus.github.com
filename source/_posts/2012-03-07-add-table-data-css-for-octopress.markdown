@@ -10,7 +10,7 @@ categories:
 - css
 styles: [data-table]
 ---
-昨天恢复了一个[旧博客](../../../../2010/11/15/tiny-countdown/)，里面包含了一个数据表格。 
+昨天恢复了一个[旧博客]({% post_url 2010-11-15-tiny-countdown %})，里面包含了一个数据表格。 
 
 但[Octopress][]的默认表格是不具有边框的，在看数据表格时会很难看。
 
