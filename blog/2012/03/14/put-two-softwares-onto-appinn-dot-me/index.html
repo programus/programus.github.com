@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>为Octopress追加数据表格的CSS - 程序猎人的博客</title>
+  <title>在programus.appinn.me上放了两个软件 - 程序猎人的博客</title>
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="昨天恢复了一个旧博客，里面包含了一个数据表格。 但Octopress的默认表格是不具有边框的，在看数据表格时会很难看。 于是，对Octopress做了一番剖析，追加了针对数据表格的CSS格式，并允许在博客的内容文件中选择是否使用数据表格。 要做到这一点，首先得先找到原始CSS的所在， &hellip;">
+  <meta name="description" content="大概两个星期前，跟小众软件申请了&lt;appinn.me>的域名——&lt;programus.appinn.me>。 说起来有点对不住小众，因为各种原因，一直没腾出时间去打点。今天终于抽出了点时间，去放了两个以前做的软件—— PTray
+ScreenRuler 小众提供的模板还是不错的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,11 +19,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress">
+  <link rel="canonical" href="http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -83,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">为Octopress追加数据表格的CSS</h1>
+      <h1 class="entry-title">在programus.appinn.me上放了两个软件</h1>
     
     
       <p class="meta">
@@ -99,118 +98,28 @@
   
 
 
-<time datetime="2012-03-07T21:56:00+09:00" pubdate data-updated="true">2012-03-07</time>
+<time datetime="2012-03-14T22:57:00+09:00" pubdate data-updated="true">2012-03-14</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>昨天恢复了一个<a href="/blog/2010/11/15/tiny-countdown/">旧博客</a>，里面包含了一个数据表格。</p>
+<div class="entry-content"><p>大概两个星期前，跟<a href="http://appinn.com" title="小众软件">小众软件</a>申请了&lt;appinn.me>的域名——&lt;programus.appinn.me>。</p>
 
-<p>但<a href="http://octopress.org" title="Octopress">Octopress</a>的默认表格是不具有边框的，在看数据表格时会很难看。</p>
-
-<p>于是，对<a href="http://octopress.org" title="Octopress">Octopress</a>做了一番剖析，追加了针对数据表格的CSS格式，并允许在博客的内容文件中选择是否使用数据表格。</p>
+<p>说起来有点对不住<a href="http://appinn.com" title="小众软件">小众</a>，因为各种原因，一直没腾出时间去打点。今天终于抽出了点时间，去放了两个以前做的软件——</p>
 
 <!--more-->
 
 
-<p>要做到这一点，首先得先找到原始CSS的所在，在Firefox中<a href="http://getfirebug.com/" title="Firebug">Firebug</a>的帮助下，很顺利地找到了位于<code>source/stylesheets</code>的<code>screen.css</code>文件。</p>
-
-<p>打开一看，傻眼了。居然是紧凑型CSS，都堆在一起了。于是上网找了个CSS格式化工具——<a href="http://www.cssportal.com/online-css-editor/">http://www.cssportal.com/online-css-editor/</a>。</p>
-
-<p>当CSS格式化后，查看了一下里面对<code>table</code>、<code>th</code>、<code>td</code>的格式定义。发现确实将<code>border-width</code>设置成了<code>0</code>。</p>
-
-<p>看来只有覆盖它们了。于是写了一个<code>data-table.css</code>，同样放在<code>source/stylesheets</code>下面。</p>
-
-<div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
-<noscript><pre><code>table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#e7e3e7;
-}
-
-th, td {
-  border-style:dashed;
-  border-width:1px;
-  border-color:#e7e3e7;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-th {
-  border-style:solid;
-  font-weight:bold;
-  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
-}
-</code></pre></noscript></div>
+<ul>
+<li><a href="http://programus.appinn.me/softwares/ptray/">PTray</a></li>
+<li><a href="http://programus.appinn.me/softwares/screenruler/">ScreenRuler</a></li>
+</ul>
 
 
-<p>然后找到引入<code>screen.css</code>的文件，在其后引入<code>data-table.css</code>。这个文件是<code>source/_includes/head.html</code>。但为了保证没有数据表格的博客还能继续使用原本的表格风格，在里面加了少许条件。</p>
-
-<div><script src='https://gist.github.com/1993032.js?file=head.html'></script>
-<noscript><pre><code>  &lt;link href=&quot;{{ root_url }}/stylesheets/screen.css&quot; media=&quot;screen, projection&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-  {% if page.styles contains 'data-table' %}
-  &lt;link href=&quot;{{ root_url }}/stylesheets/data-table.css&quot; media=&quot;screen, projection&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
-  {% endif %}
-</code></pre></noscript></div>
-
-
-<p>这样，只要在博客文件的<a href="https://github.com/mojombo/jekyll/wiki/yaml-front-matter"><code>yaml front matter</code></a>部分里面加入<code>styles: [data-table]</code>，就可以让数据表格用的表格风格生效了。</p>
-
-<p>要在博客里插入表格，则可以使用如下格式。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>左对齐表头 | 中间对齐表头 | 右对齐表头
-</span><span class='line'>:----------|:------------:|----------:
-</span><span class='line'>左对齐数据 |中间对齐数据  |右对齐数据
-</span><span class='line'>第二行数据 |也是第二行    |还是第二行
-</span><span class='line'>懒得写了...|.....         |.....
-</span><span class='line'>长数据，以便看出表头的对齐|长数据，以便看出表头的对齐|长数据，以便看出表头的对齐
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就会得到如下表格：</p>
-
-<table>
-<thead>
-<tr>
-<th align="left">左对齐表头 </th>
-<th align="center"> 中间对齐表头 </th>
-<th align="right"> 右对齐表头</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">左对齐数据 </td>
-<td align="center">中间对齐数据  </td>
-<td align="right">右对齐数据</td>
-</tr>
-<tr>
-<td align="left">第二行数据 </td>
-<td align="center">也是第二行    </td>
-<td align="right">还是第二行</td>
-</tr>
-<tr>
-<td align="left">懒得写了&#8230;</td>
-<td align="center">&#8230;..         </td>
-<td align="right">&#8230;..</td>
-</tr>
-<tr>
-<td align="left">长数据，以便看出表头的对齐</td>
-<td align="center">长数据，以便看出表头的对齐</td>
-<td align="right">长数据，以便看出表头的对齐</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>其中的左右对齐，取决于表头下面一行中的冒号的位置。</p>
+<p>小众提供的模板还是不错的，不需要自己修改HTML，只要把对应的文件内容做下更改就行。不过，可惜这些对应的文件的扩展名是<code>.txt</code>，导致在里面编写<code>HTML</code>的时候无法代码高亮。
+等再有时间的时候，研究一下如何改成<code>.html</code>扩展名的。</p>
 </div>
 
 
@@ -233,12 +142,12 @@ th {
   
 
 
-<time datetime="2012-03-07T21:56:00+09:00" pubdate data-updated="true">2012-03-07</time>
+<time datetime="2012-03-14T22:57:00+09:00" pubdate data-updated="true">2012-03-14</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/computer/'>computer</a>, <a class='category' href='/blog/categories/css/'>css</a>, <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/appinn/'>appinn</a>, <a class='category' href='/blog/categories/computer/'>computer</a>, <a class='category' href='/blog/categories/software/'>software</a>
   
 </span>
 
@@ -254,12 +163,12 @@ th {
     height="16" 
     frameborder="0" 
     src=
-      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
+      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
   </iframe>
   </span>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/" data-via="programus" data-counturl="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/" data-via="programus" data-counturl="http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -271,10 +180,8 @@ th {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/03/04/share-weibo-button/" title="Previous Post: 为Octopress追加[分享到微博]按钮">&laquo; 为Octopress追加[分享到微博]按钮</a>
+        <a class="basic-alignment left" href="/blog/2012/03/07/add-table-data-css-for-octopress/" title="Previous Post: 为Octopress追加数据表格的CSS">&laquo; 为Octopress追加数据表格的CSS</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/" title="Next Post: 在programus.appinn.me上放了两个软件">在programus.appinn.me上放了两个软件 &raquo;</a>
       
     </p>
   </footer>
@@ -402,8 +309,8 @@ th {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/';
-        var disqus_url = 'http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/';
+        var disqus_identifier = 'http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/';
+        var disqus_url = 'http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/';
         var disqus_script = 'embed.js';
       
     (function () {

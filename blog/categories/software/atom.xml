@@ -4,7 +4,7 @@
   <title><![CDATA[Category: software | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-08T21:57:49+09:00</updated>
+  <updated>2012-03-14T23:11:32+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在programus.appinn.me上放了两个软件]]></title>
+    <link href="http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/"/>
+    <updated>2012-03-14T22:57:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me</id>
+    <content type="html"><![CDATA[<p>大概两个星期前，跟[小众软件][]申请了&lt;appinn.me>的域名——&lt;programus.appinn.me>。</p>
+
+<p>说起来有点对不住[小众][]，因为各种原因，一直没腾出时间去打点。今天终于抽出了点时间，去放了两个以前做的软件——</p>
+
+<!--more-->
+
+
+<ul>
+<li><a href="http://programus.appinn.me/softwares/ptray/">PTray</a></li>
+<li><a href="http://programus.appinn.me/softwares/screenruler/">ScreenRuler</a></li>
+</ul>
+
+
+<p>小众提供的模板还是不错的，不需要自己修改HTML，只要把对应的文件内容做下更改就行。不过，可惜这些对应的文件的扩展名是<code>.txt</code>，导致在里面编写<code>HTML</code>的时候无法代码高亮。
+等再有时间的时候，研究一下如何改成<code>.html</code>扩展名的。</p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+[Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TinyCountdown - 小巧纯粹的倒计时软件]]></title>
@@ -125,6 +171,8 @@
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
 
 [煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
 [新浪微博]:		http://weibo.com								"新浪微博"
 [微博]:			http://weibo.com								"新浪微博"
 [墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"

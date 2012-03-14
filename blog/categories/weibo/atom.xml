@@ -4,7 +4,7 @@
   <title><![CDATA[Category: weibo | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/weibo/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-08T21:57:49+09:00</updated>
+  <updated>2012-03-14T23:11:32+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -136,6 +136,8 @@ rake preview
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
 
 [煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
 [新浪微博]:		http://weibo.com								"新浪微博"
 [微博]:			http://weibo.com								"新浪微博"
 [墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
@@ -262,6 +264,8 @@ weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀
 [维基百科]:		http://zh.wikipedia.org							"维基中文"
 
 [煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
 [新浪微博]:		http://weibo.com								"新浪微博"
 [微博]:			http://weibo.com								"新浪微博"
 [墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"

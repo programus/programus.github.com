@@ -4,7 +4,7 @@
   <title><![CDATA[程序猎人的博客]]></title>
   <link href="http://programus.github.com/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-08T21:57:49+09:00</updated>
+  <updated>2012-03-14T23:11:32+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在programus.appinn.me上放了两个软件]]></title>
+    <link href="http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/"/>
+    <updated>2012-03-14T22:57:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me</id>
+    <content type="html"><![CDATA[<p>大概两个星期前，跟<a href="http://appinn.com" title="小众软件">小众软件</a>申请了&lt;appinn.me>的域名——&lt;programus.appinn.me>。</p>
+
+<p>说起来有点对不住<a href="http://appinn.com" title="小众软件">小众</a>，因为各种原因，一直没腾出时间去打点。今天终于抽出了点时间，去放了两个以前做的软件——</p>
+
+<!--more-->
+
+
+<ul>
+<li><a href="http://programus.appinn.me/softwares/ptray/">PTray</a></li>
+<li><a href="http://programus.appinn.me/softwares/screenruler/">ScreenRuler</a></li>
+</ul>
+
+
+<p>小众提供的模板还是不错的，不需要自己修改HTML，只要把对应的文件内容做下更改就行。不过，可惜这些对应的文件的扩展名是<code>.txt</code>，导致在里面编写<code>HTML</code>的时候无法代码高亮。
+等再有时间的时候，研究一下如何改成<code>.html</code>扩展名的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为Octopress追加数据表格的CSS]]></title>
