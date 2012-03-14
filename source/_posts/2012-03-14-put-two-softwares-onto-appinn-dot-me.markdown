@@ -8,7 +8,7 @@ categories:
 - software
 - appinn
 ---
-大概两个星期前，跟[小众软件][]申请了<appinn.me>的域名——<programus.appinn.me>。
+大概两个星期前，跟[小众软件][]申请了[appinn.me](http://appinn.me)的域名——[programus.appinn.me](http://programus.appinn.me)。
 
 说起来有点对不住[小众][]，因为各种原因，一直没腾出时间去打点。今天终于抽出了点时间，去放了两个以前做的软件——
 <!--more-->
