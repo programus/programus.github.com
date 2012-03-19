@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-14T23:23:37+09:00</updated>
+  <updated>2012-03-19T22:04:35+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -35,7 +35,8 @@
 
 <p>看来只有覆盖它们了。于是写了一个<code>data-table.css</code>，同样放在<code>source/stylesheets</code>下面。</p>
 
-<p>{% gist 1993032 data-table.css %}</p>
+<p>{% gist 1993032 data-table.css %}
+（感谢<a href="http://chen.yanping.me/" title="陈堰平的个人网站">陈堰平</a>在评论中的指正，CSS文件修正了。修正详情在文章最后。）</p>
 
 <p>然后找到引入<code>screen.css</code>的文件，在其后引入<code>data-table.css</code>。这个文件是<code>source/_includes/head.html</code>。但为了保证没有数据表格的博客还能继续使用原本的表格风格，在里面加了少许条件。</p>
 
@@ -90,6 +91,28 @@
 
 
 <p>其中的左右对齐，取决于表头下面一行中的冒号的位置。</p>
+
+<hr />
+
+<h3>2012-03-19补充：</h3>
+
+<p>感谢<a href="http://chen.yanping.me/" title="陈堰平的个人网站">陈堰平</a>的指正，之前的CSS会连同代码框都改掉。查看了一下HTML代码，发现代码框的代码有如下特点：</p>
+
+<ul>
+<li>嵌在<code>&lt;div class="highlight"&gt;</code>或<code>&lt;div class="gist-highlight"&gt;</code>中</li>
+<li><code>&lt;td&gt;</code>标签有<code>code</code>或<code>gutter</code>这两个class</li>
+<li><code>&lt;td&gt;</code>的子标签是<code>&lt;pre&gt;</code></li>
+</ul>
+
+
+<p>本想用以上中的某种来区分对待CSS，但CSS中不支持通过排除某class（CSS3中有了<code>:not()</code>，但CSS3未被全部浏览器支持）或指定父标签来进行选择。由于对CSS也不是很熟悉，所以重新有学习了一次CSS选择器相关的知识，其中发现一个<code>+</code>选择器，可以通过在同级出现的标签来指定。这时发现了代码框的又一个特点：</p>
+
+<ul>
+<li><code>&lt;table&gt;</code>标签是孤独的（没有兄弟节点）</li>
+</ul>
+
+
+<p>但数据表格必然是配合文章出现的，前后通常都会有些兄弟标签。（即使没有也可以自己追加一个空<code>&lt;span&gt;</code>或<code>&lt;div&gt;</code>来解决。）于是，使用<code>* table</code>来做选择器选出非代码的表格——也就是数据表格——从而完成了数据表格特定CSS的实现。</p>
 
 <p>{% include links %}</p>
 ]]></content>
