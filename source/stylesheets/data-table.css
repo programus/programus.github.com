@@ -1,10 +1,10 @@
-table {
+* + table {
   border-style:solid;
   border-width:1px;
   border-color:#e7e3e7;
 }
 
-th, td {
+* + table th, * + table td {
   border-style:dashed;
   border-width:1px;
   border-color:#e7e3e7;
@@ -12,20 +12,20 @@ th, td {
   padding-right: 3px;
 }
 
-th {
+* + table th {
   border-style:solid;
   font-weight:bold;
   background: url("/images/noise.png?1330434582") repeat scroll left top #F7F3F7;
 }
 
-th[align="left"], td[align="left"] {
+* + table th[align="left"], * + table td[align="left"] {
   text-align:left;
 }
 
-th[align="right"], td[align="right"] {
+* + table th[align="right"], * + table td[align="right"] {
   text-align:right;
 }
 
-th[align="center"], td[align="center"] {
+* + table th[align="center"], * + table td[align="center"] {
   text-align:center;
 }
