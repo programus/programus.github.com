@@ -4,7 +4,7 @@
   <title><![CDATA[Category: computer | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/computer/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-19T22:04:35+09:00</updated>
+  <updated>2012-03-21T14:07:56+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -137,7 +137,7 @@
 </ul>
 
 
-<p>但数据表格必然是配合文章出现的，前后通常都会有些兄弟标签。（即使没有也可以自己追加一个空<code>&lt;span&gt;</code>或<code>&lt;div&gt;</code>来解决。）于是，使用<code>* table</code>来做选择器选出非代码的表格——也就是数据表格——从而完成了数据表格特定CSS的实现。</p>
+<p>但数据表格必然是配合文章出现的，前后通常都会有些兄弟标签。（即使没有也可以自己追加一个空<code>&lt;span&gt;</code>或<code>&lt;div&gt;</code>来解决。）于是，使用<code>* + table</code>来做选择器选出非代码的表格——也就是数据表格——从而完成了数据表格特定CSS的实现。</p>
 
 <p>{% include links %}</p>
 ]]></content>
