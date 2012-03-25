@@ -4,7 +4,7 @@
   <title><![CDATA[程序猎人的博客]]></title>
   <link href="http://programus.github.com/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-25T19:47:04+09:00</updated>
+  <updated>2012-03-25T22:02:34+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -503,7 +503,7 @@ weibo_share: true   # Whether show the sharing button
 
 <p>先到<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>里面生成自己的微博秀嵌入代码。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -524,27 +524,28 @@ weibo_share: true   # Whether show the sharing button
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iframe 
-</span><span class='line'>  width="100%" 
-</span><span class='line'>  height="550" 
-</span><span class='line'>  class="share_self"  
-</span><span class='line'>  frameborder="0" 
-</span><span class='line'>  scrolling="no" 
-</span><span class='line'>  src="http://widget.weibo.com/weiboshow/index.php?
-</span><span class='line'>      width=0&
-</span><span class='line'>      height=550&
-</span><span class='line'>      fansRow=1&
-</span><span class='line'>      ptype=1&
-</span><span class='line'>      speed=0&
-</span><span class='line'>      skin=2&
-</span><span class='line'>      isTitle=0&
-</span><span class='line'>      noborder=1&
-</span><span class='line'>      isWeibo=1&
-</span><span class='line'>      isFans=1&
-</span><span class='line'>      uid=1098907490&
-</span><span class='line'>      verifier=abd54ad9&
-</span><span class='line'>      dpc=1"&gt;
-</span><span class='line'>&lt;/iframe&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;iframe</span>
+</span><span class='line'>  <span class="na">width=</span><span class="s">&quot;100%&quot;</span>
+</span><span class='line'>  <span class="na">height=</span><span class="s">&quot;550&quot;</span>
+</span><span class='line'>  <span class="na">class=</span><span class="s">&quot;share_self&quot;</span>
+</span><span class='line'>  <span class="na">frameborder=</span><span class="s">&quot;0&quot;</span>
+</span><span class='line'>  <span class="na">scrolling=</span><span class="s">&quot;no&quot;</span>
+</span><span class='line'>  <span class="na">src=</span><span class="s">&quot;http://widget.weibo.com/weiboshow/index.php?</span>
+</span><span class='line'><span class="s">      width=0&amp;</span>
+</span><span class='line'><span class="s">      height=550&amp;</span>
+</span><span class='line'><span class="s">      fansRow=1&amp;</span>
+</span><span class='line'><span class="s">      ptype=1&amp;</span>
+</span><span class='line'><span class="s">      speed=0&amp;</span>
+</span><span class='line'><span class="s">      skin=2&amp;</span>
+</span><span class='line'><span class="s">      isTitle=0&amp;</span>
+</span><span class='line'><span class="s">      noborder=1&amp;</span>
+</span><span class='line'><span class="s">      isWeibo=1&amp;</span>
+</span><span class='line'><span class="s">      isFans=1&amp;</span>
+</span><span class='line'><span class="s">      uid=1098907490&amp;</span>
+</span><span class='line'><span class="s">      verifier=abd54ad9&amp;</span>
+</span><span class='line'><span class="s">      dpc=1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/iframe&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题名&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
