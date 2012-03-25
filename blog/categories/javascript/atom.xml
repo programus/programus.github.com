@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://programus.github.com/"/>
+  <updated>2012-03-25T19:47:04+09:00</updated>
+  <id>http://programus.github.com/</id>
+  <author>
+    <name><![CDATA[程序猎人]]></name>
+    <email><![CDATA[programus@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript游戏——Memory]]></title>
+    <link href="http://programus.github.com/blog/2012/03/25/js-game-memory/"/>
+    <updated>2012-03-25T17:47:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/25/js-game-memory</id>
+    <content type="html"><![CDATA[<p>前段时间看了《JavaScript语言精粹》，一直想实践一下。于是利用了3、4天的时间做了一个记忆力游戏——<a href="http://programus.appinn.me/jsgames/memory-single.html">Memory</a>。</p>
+
+<!--more-->
+
+
+<p>先在这里放一个直接可玩的版本：</p>
+
+<iframe id="memory-game" width="350" height="380" src="http://programus.appinn.me/jsgames/memory-single.html"></iframe>
+
+
+<p>看书的时候随随便便就看过去了，实际做的时候才总是感到书到用时方恨少。书中提到的一些常见问题还真是很常见，在实际编写程序的过程中很多都碰上了。</p>
+
+<p>游戏最终在网上发布时使用的文件——<a href="http://programus.appinn.me/jsgames/memory-single.html">memory-single.html</a>——是一个整合了所有内容的文件，直接转存到本地后，单独一个文件就可以展现整个游戏内容。甚至包括所有的声音和图片。</p>
+
+<p>对于图片，使用了<a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URI Schema</a>的技术，将图像的二进制内容转码成Base64编码，以文本形式写在html文件中。不过，本游戏中一共就用了两个图片：作为favicon的图标和下拉列表框的自定义箭头。</p>
+
+<p>对于声音，使用了Pedro Ladaria做的<a href="http://www.codebase.es/riffwave/">代码生成声音的库</a>。我在[CSSer][]上放了一个<a href="http://www.csser.com/board/4f6ab5086e9e4f0817000066#/post/4f6ab6462af57d0a17000020/more">贴板</a>，里面贴了声音库的使用相关链接。</p>
+
+<p>最后，说一下自定义风格的下拉列表框。参考了<a href="http://bavotasan.com/2011/style-select-box-using-only-css/">这篇文章</a>，使用外框的标签来切断<code>&lt;select&gt;</code>的内容，将右边的箭头排除到外框标签的外面并遮挡住。其中不同的是，我在这里使用的外框是<code>&lt;span&gt;</code>而不是<code>&lt;div&gt;</code>。最初使用<code>&lt;span&gt;</code>的时候，没有成功，后来在网上查询才知道只有<code>block</code>级的标签才有效，而<code>&lt;span&gt;</code>不是。但加上<code>display:inline-block</code>就可以如<code>block</code>级标签一般工作了。</p>
+
+<p>说了这么多，最后附上代码。</p>
+
+<div title="其实，我是个按钮" style="cursor:pointer;" onclick="if($('#source-block').css('display') === 'none') {$('#source-block').css('display', 'block');$('#show-hide').text('隐藏');}else{$('#source-block').css('display','none');$('#show-hide').text('显示');}">[<span id="show-hide">显示</span>代码部分]</div>
+
+
+
+
+<div style="display:none;" id="source-block">
+<div><script src='https://gist.github.com/2192639.js?file='></script>
+<noscript><pre><code>table.matrix,tbody.matrix {
+  border-style:double;
+  border-width:3px;
+  border-color:#000000;
+  border-spacing:0;
+  padding:0;
+  margin:0;
+  background-color:#aaffff;
+}
+table.matrix td {
+  border-style:solid;
+  border-width:1px;
+  border-color:#AAAAAA;
+  padding:0;
+  margin:0;
+  width:1.5em;
+  height:1.5em;
+}
+table.matrix td.action {
+  background:#ffffff;
+  cursor:pointer;
+}
+
+table.matrix td.fading {
+  background:#ffffff;
+}
+
+table.matrix td.action:hover {
+  background:#ccffcc;
+  cursor:pointer;
+}
+
+table.matrix td.error {
+  border-color:#ff0000;
+}
+
+table.matrix td.error-action {
+  border-color:#aaff00;
+}
+
+table.matrix td.show {
+  background:#dddddd;
+}
+
+#matrix-size-span {
+  width:3em;
+  overflow-x:hidden;
+  display:inline-block;
+  background-image:url(&quot;../select-arrow.png&quot;);
+  background-repeat:no-repeat;
+  background-position:center right;
+     border: 1px solid #ccc;
+}
+
+#matrix-size-span.disabled {
+  background-color:#777777;
+}
+
+#matrix-size {
+  color:#777777;
+  width:5em;
+  background: transparent;
+     border: 0px;
+     cursor:pointer;
+}
+
+#matrix-size:disabled {
+  color:#444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+  cursor:default;
+}
+
+#score.updating {
+  color:#00aa00;
+  background:#dddd88;
+}
+
+#score.stable {
+  background:inherit;
+}
+
+#score-panel {
+  margin-top:0.3em;
+  margin-bottom:0.2em;
+}
+
+#score-bar {
+  padding:2px;
+}
+
+#score-bar.finished {
+  color:#444444;
+  background:#edcfaa;
+}
+
+#score-bar.normal {
+  color:#777777;
+}
+
+#game-panel {
+}
+
+#start-action {
+  background-color:#ededed;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  color:#777777;
+  font-family:arial;
+  font-size:11px;
+  font-weight:bold;
+  padding:2px 5px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+#start-action:disabled {
+  background-color:#777777;
+  color:#444444;
+  border:1px solid #444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+  cursor:default;
+}
+
+#start-action:enabled:hover {
+  background-color:#dfdfdf;
+}
+
+#start-action:enabled:active {
+  position:relative;
+  top:1px;
+}
+
+h1 {
+  text-align:center;
+  color:#444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+}
+
+body {
+  background-color:#ededed;
+}
+</code></pre></noscript></div>
+
+</div>
+
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+[Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+
+[CSSer]:		http://www.csser.com/							"CSSer"</p>
+]]></content>
+  </entry>
+  
+</feed>

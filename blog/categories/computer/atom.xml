@@ -4,7 +4,7 @@
   <title><![CDATA[Category: computer | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/computer/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-21T14:07:56+09:00</updated>
+  <updated>2012-03-25T19:47:04+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript游戏——Memory]]></title>
+    <link href="http://programus.github.com/blog/2012/03/25/js-game-memory/"/>
+    <updated>2012-03-25T17:47:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/25/js-game-memory</id>
+    <content type="html"><![CDATA[<p>前段时间看了《JavaScript语言精粹》，一直想实践一下。于是利用了3、4天的时间做了一个记忆力游戏——<a href="http://programus.appinn.me/jsgames/memory-single.html">Memory</a>。</p>
+
+<!--more-->
+
+
+<p>先在这里放一个直接可玩的版本：</p>
+
+<iframe id="memory-game" width="350" height="380" src="http://programus.appinn.me/jsgames/memory-single.html"></iframe>
+
+
+<p>看书的时候随随便便就看过去了，实际做的时候才总是感到书到用时方恨少。书中提到的一些常见问题还真是很常见，在实际编写程序的过程中很多都碰上了。</p>
+
+<p>游戏最终在网上发布时使用的文件——<a href="http://programus.appinn.me/jsgames/memory-single.html">memory-single.html</a>——是一个整合了所有内容的文件，直接转存到本地后，单独一个文件就可以展现整个游戏内容。甚至包括所有的声音和图片。</p>
+
+<p>对于图片，使用了<a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URI Schema</a>的技术，将图像的二进制内容转码成Base64编码，以文本形式写在html文件中。不过，本游戏中一共就用了两个图片：作为favicon的图标和下拉列表框的自定义箭头。</p>
+
+<p>对于声音，使用了Pedro Ladaria做的<a href="http://www.codebase.es/riffwave/">代码生成声音的库</a>。我在[CSSer][]上放了一个<a href="http://www.csser.com/board/4f6ab5086e9e4f0817000066#/post/4f6ab6462af57d0a17000020/more">贴板</a>，里面贴了声音库的使用相关链接。</p>
+
+<p>最后，说一下自定义风格的下拉列表框。参考了<a href="http://bavotasan.com/2011/style-select-box-using-only-css/">这篇文章</a>，使用外框的标签来切断<code>&lt;select&gt;</code>的内容，将右边的箭头排除到外框标签的外面并遮挡住。其中不同的是，我在这里使用的外框是<code>&lt;span&gt;</code>而不是<code>&lt;div&gt;</code>。最初使用<code>&lt;span&gt;</code>的时候，没有成功，后来在网上查询才知道只有<code>block</code>级的标签才有效，而<code>&lt;span&gt;</code>不是。但加上<code>display:inline-block</code>就可以如<code>block</code>级标签一般工作了。</p>
+
+<p>说了这么多，最后附上代码。</p>
+
+<div title="其实，我是个按钮" style="cursor:pointer;" onclick="if($('#source-block').css('display') === 'none') {$('#source-block').css('display', 'block');$('#show-hide').text('隐藏');}else{$('#source-block').css('display','none');$('#show-hide').text('显示');}">[<span id="show-hide">显示</span>代码部分]</div>
+
+
+
+
+<div style="display:none;" id="source-block">
+{% gist 2192639 %}
+</div>
+
+
+<p>{% include links %}</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在programus.appinn.me上放了两个软件]]></title>
@@ -261,45 +302,6 @@ rake preview
 <p>其中的<code>weibo_uid</code>和<code>weibo_verifier</code>是从<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>生成的代码中取得的，其它则是显示设定。</p>
 
 <p>至此，搞定了微博的嵌入。</p>
-
-<p>{% include links %}</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[第一篇用Octopress生成的日志]]></title>
-    <link href="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/"/>
-    <updated>2012-03-01T21:31:00+09:00</updated>
-    <id>http://programus.github.com/blog/2012/03/01/first-post-by-octopress</id>
-    <content type="html"><![CDATA[<p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
-
-<!--more-->
-
-
-<p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对[Ruby][]那么大意见，所以装了运行Jekyll的一切必需品，现学[Git][]（这个早就听说了，一直没用到所以没学）、[Jekyll][]、[Markdown][]……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
-
-<p>经过一番查找，发现是因为[Jekyll]运行时使用默认环境的地区编码信息，所以不识别UTF-8编码中的中文。从网上搜到Windows下可以使用<code>chcp</code>来改变语言编码，于是试了试<code>chcp 65001</code>，发现运行</p>
-
-<pre><code>jekyll --pygments --safe --auto --server
-</code></pre>
-
-<p>之后没有任何显示。遂放弃。</p>
-
-<p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
-
-<p>{% gist 1972602 %}</p>
-
-<p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
-
-<p>于是才有了此篇日志。</p>
-
-<hr />
-
-<p>本来用[Jekyll][]的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了[Octopress][]这个东西。于是毅然变节，改投[Octopress][]，于是有了现在的后半段。</p>
-
-<p>[Octopress][]比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>master</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
-
-<p>对[Git][]还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
 
 <p>{% include links %}</p>
 ]]></content>

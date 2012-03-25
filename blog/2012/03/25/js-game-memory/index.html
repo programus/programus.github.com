@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>第一篇用Octopress生成的日志 - 程序猎人的博客</title>
+  <title>Javascript游戏——Memory - 程序猎人的博客</title>
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="先是在知乎上发现了一个叫吕坤的人，顺着简介发现了他的博客。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。 我不像吕坤对Ruby那么大意见，所以装了运行Jekyll的一切必需品，现学Git（这个早就听说了，一直没用到所以没学）、Jekyll、Markdown……折腾了一个星期天， &hellip;">
+  <meta name="description" content="前段时间看了《JavaScript语言精粹》，一直想实践一下。于是利用了3、4天的时间做了一个记忆力游戏——Memory。 先在这里放一个直接可玩的版本： 看书的时候随随便便就看过去了，实际做的时候才总是感到书到用时方恨少。书中提到的一些常见问题还真是很常见，在实际编写程序的过程中很多都碰上了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://programus.github.com/blog/2012/03/01/first-post-by-octopress">
+  <link rel="canonical" href="http://programus.github.com/blog/2012/03/25/js-game-memory">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">第一篇用Octopress生成的日志</h1>
+      <h1 class="entry-title">Javascript游戏——Memory</h1>
     
     
       <p class="meta">
@@ -97,45 +97,192 @@
   
 
 
-<time datetime="2012-03-01T21:31:00+09:00" pubdate data-updated="true">2012-03-01</time>
+<time datetime="2012-03-25T17:47:00+09:00" pubdate data-updated="true">2012-03-25</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>先是在知乎上发现了一个叫<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>的人，顺着简介发现了<a href="http://lvkun.github.com/" title="吕坤的github博客">他的博客</a>。然后了解到可以使用github来写博客，觉得很好玩，就打算试一试。</p>
+<div class="entry-content"><p>前段时间看了《JavaScript语言精粹》，一直想实践一下。于是利用了3、4天的时间做了一个记忆力游戏——<a href="http://programus.appinn.me/jsgames/memory-single.html">Memory</a>。</p>
 
 <!--more-->
 
 
-<p>我不像<a href="http://www.zhihu.com/people/lv-kun" title="吕坤的知乎主页">吕坤</a>对<a href="http://www.ruby-lang.org" title="Ruby">Ruby</a>那么大意见，所以装了运行Jekyll的一切必需品，现学<a href="http://git-scm.com/" title="Git">Git</a>（这个早就听说了，一直没用到所以没学）、<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>、<a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a>……折腾了一个星期天，终于可以显示博客了。正高兴呢，忽然发现服务器不正常了。</p>
+<p>先在这里放一个直接可玩的版本：</p>
 
-<p>经过一番查找，发现是因为<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>运行时使用默认环境的地区编码信息，所以不识别UTF-8编码中的中文。从网上搜到Windows下可以使用<code>chcp</code>来改变语言编码，于是试了试<code>chcp 65001</code>，发现运行</p>
-
-<pre><code>jekyll --pygments --safe --auto --server
-</code></pre>
-
-<p>之后没有任何显示。遂放弃。</p>
-
-<p>继续查，发现哪怕在Windows下，只要设置<code>LANG</code>和<code>LC_ALL</code>后，便可以设置的编码运行。于是</p>
-
-<div><script src='https://gist.github.com/1972602.js?file='></script>
-<noscript><pre><code>set LANG=zh_CN.UTF-8
-set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
+<iframe id="memory-game" width="350" height="380" src="http://programus.appinn.me/jsgames/memory-single.html"></iframe>
 
 
-<p>然后再次运行<code>jekyll</code>，<strong>正常了！</strong></p>
+<p>看书的时候随随便便就看过去了，实际做的时候才总是感到书到用时方恨少。书中提到的一些常见问题还真是很常见，在实际编写程序的过程中很多都碰上了。</p>
 
-<p>于是才有了此篇日志。</p>
+<p>游戏最终在网上发布时使用的文件——<a href="http://programus.appinn.me/jsgames/memory-single.html">memory-single.html</a>——是一个整合了所有内容的文件，直接转存到本地后，单独一个文件就可以展现整个游戏内容。甚至包括所有的声音和图片。</p>
 
-<hr />
+<p>对于图片，使用了<a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URI Schema</a>的技术，将图像的二进制内容转码成Base64编码，以文本形式写在html文件中。不过，本游戏中一共就用了两个图片：作为favicon的图标和下拉列表框的自定义箭头。</p>
 
-<p>本来用<a href="https://github.com/mojombo/jekyll/wiki" title="Jekyll">Jekyll</a>的日志已经做好了，但是发现无法从手机上正常浏览。又懒得去研究怎么调整HTML、CSS那一套东西。正一筹莫展之际，发现了<a href="http://octopress.org" title="Octopress">Octopress</a>这个东西。于是毅然变节，改投<a href="http://octopress.org" title="Octopress">Octopress</a>，于是有了现在的后半段。</p>
+<p>对于声音，使用了Pedro Ladaria做的<a href="http://www.codebase.es/riffwave/">代码生成声音的库</a>。我在<a href="http://www.csser.com/" title="CSSer">CSSer</a>上放了一个<a href="http://www.csser.com/board/4f6ab5086e9e4f0817000066#/post/4f6ab6462af57d0a17000020/more">贴板</a>，里面贴了声音库的使用相关链接。</p>
 
-<p><a href="http://octopress.org" title="Octopress">Octopress</a>比较有趣，会把代码放在<code>source</code>目录下，把生成的网站放在<code>_deploy</code>目录下。（当然所有目录都可以通过设置修改。）然后会自动将<code>_deploy</code>目录作为github page的<code>master</code>分支，将包含source在内的部分作为github page的<code>source</code>分支。</p>
+<p>最后，说一下自定义风格的下拉列表框。参考了<a href="http://bavotasan.com/2011/style-select-box-using-only-css/">这篇文章</a>，使用外框的标签来切断<code>&lt;select&gt;</code>的内容，将右边的箭头排除到外框标签的外面并遮挡住。其中不同的是，我在这里使用的外框是<code>&lt;span&gt;</code>而不是<code>&lt;div&gt;</code>。最初使用<code>&lt;span&gt;</code>的时候，没有成功，后来在网上查询才知道只有<code>block</code>级的标签才有效，而<code>&lt;span&gt;</code>不是。但加上<code>display:inline-block</code>就可以如<code>block</code>级标签一般工作了。</p>
 
-<p>对<a href="http://git-scm.com/" title="Git">Git</a>还不是特别了解，或许领会不到如此分离的真谛，但隐约能感觉到这样做会使Repository里的结构清晰很多。</p>
+<p>说了这么多，最后附上代码。</p>
+
+<div title="其实，我是个按钮" style="cursor:pointer;" onclick="if($('#source-block').css('display') === 'none') {$('#source-block').css('display', 'block');$('#show-hide').text('隐藏');}else{$('#source-block').css('display','none');$('#show-hide').text('显示');}">[<span id="show-hide">显示</span>代码部分]</div>
+
+
+
+
+<div style="display:none;" id="source-block">
+<div><script src='https://gist.github.com/2192639.js?file='></script>
+<noscript><pre><code>table.matrix,tbody.matrix {
+  border-style:double;
+  border-width:3px;
+  border-color:#000000;
+  border-spacing:0;
+  padding:0;
+  margin:0;
+  background-color:#aaffff;
+}
+table.matrix td {
+  border-style:solid;
+  border-width:1px;
+  border-color:#AAAAAA;
+  padding:0;
+  margin:0;
+  width:1.5em;
+  height:1.5em;
+}
+table.matrix td.action {
+  background:#ffffff;
+  cursor:pointer;
+}
+
+table.matrix td.fading {
+  background:#ffffff;
+}
+
+table.matrix td.action:hover {
+  background:#ccffcc;
+  cursor:pointer;
+}
+
+table.matrix td.error {
+  border-color:#ff0000;
+}
+
+table.matrix td.error-action {
+  border-color:#aaff00;
+}
+
+table.matrix td.show {
+  background:#dddddd;
+}
+
+#matrix-size-span {
+  width:3em;
+  overflow-x:hidden;
+  display:inline-block;
+  background-image:url(&quot;../select-arrow.png&quot;);
+  background-repeat:no-repeat;
+  background-position:center right;
+     border: 1px solid #ccc;
+}
+
+#matrix-size-span.disabled {
+  background-color:#777777;
+}
+
+#matrix-size {
+  color:#777777;
+  width:5em;
+  background: transparent;
+     border: 0px;
+     cursor:pointer;
+}
+
+#matrix-size:disabled {
+  color:#444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+  cursor:default;
+}
+
+#score.updating {
+  color:#00aa00;
+  background:#dddd88;
+}
+
+#score.stable {
+  background:inherit;
+}
+
+#score-panel {
+  margin-top:0.3em;
+  margin-bottom:0.2em;
+}
+
+#score-bar {
+  padding:2px;
+}
+
+#score-bar.finished {
+  color:#444444;
+  background:#edcfaa;
+}
+
+#score-bar.normal {
+  color:#777777;
+}
+
+#game-panel {
+}
+
+#start-action {
+  background-color:#ededed;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  color:#777777;
+  font-family:arial;
+  font-size:11px;
+  font-weight:bold;
+  padding:2px 5px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+#start-action:disabled {
+  background-color:#777777;
+  color:#444444;
+  border:1px solid #444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+  cursor:default;
+}
+
+#start-action:enabled:hover {
+  background-color:#dfdfdf;
+}
+
+#start-action:enabled:active {
+  position:relative;
+  top:1px;
+}
+
+h1 {
+  text-align:center;
+  color:#444444;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #aaaaaa;
+}
+
+body {
+  background-color:#ededed;
+}
+</code></pre></noscript></div>
+
+</div>
+
+
+
 </div>
 
 
@@ -158,12 +305,12 @@ set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
   
 
 
-<time datetime="2012-03-01T21:31:00+09:00" pubdate data-updated="true">2012-03-01</time>
+<time datetime="2012-03-25T17:47:00+09:00" pubdate data-updated="true">2012-03-25</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/computer/'>computer</a>, <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/computer/'>computer</a>, <a class='category' href='/blog/categories/game/'>game</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/software/'>software</a>
   
 </span>
 
@@ -179,12 +326,12 @@ set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
     height="16" 
     frameborder="0" 
     src=
-      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2012/03/01/first-post-by-octopress/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
+      "http://hits.sinajs.cn/A1/weiboshare.html?url=http://programus.github.com/blog/2012/03/25/js-game-memory/&amp;type=6&amp;ralateUid=1098907490&amp;language=zh_cn" allowtransparency="true">
   </iframe>
   </span>
   
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/" data-via="programus" data-counturl="http://programus.github.com/blog/2012/03/01/first-post-by-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://programus.github.com/blog/2012/03/25/js-game-memory/" data-via="programus" data-counturl="http://programus.github.com/blog/2012/03/25/js-game-memory/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -196,10 +343,8 @@ set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/01/24/what-is-this-machine/" title="Previous Post: 这是什么机器？">&laquo; 这是什么机器？</a>
+        <a class="basic-alignment left" href="/blog/2012/03/14/put-two-softwares-onto-appinn-dot-me/" title="Previous Post: 在programus.appinn.me上放了两个软件">&laquo; 在programus.appinn.me上放了两个软件</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/03/03/add-weibo-sidebar-into-octopress/" title="Next Post: 为Octopress博客追加新浪微博侧栏">为Octopress博客追加新浪微博侧栏 &raquo;</a>
       
     </p>
   </footer>
@@ -327,8 +472,8 @@ set LC_ALL=zh_CN.UTF-8</code></pre></noscript></div>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://programus.github.com/blog/2012/03/01/first-post-by-octopress/';
-        var disqus_url = 'http://programus.github.com/blog/2012/03/01/first-post-by-octopress/';
+        var disqus_identifier = 'http://programus.github.com/blog/2012/03/25/js-game-memory/';
+        var disqus_url = 'http://programus.github.com/blog/2012/03/25/js-game-memory/';
         var disqus_script = 'embed.js';
       
     (function () {
