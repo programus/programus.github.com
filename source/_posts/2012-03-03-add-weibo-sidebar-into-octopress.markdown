@@ -26,7 +26,7 @@ categories:
 
 先到[微博秀][]里面生成自己的微博秀嵌入代码。
 
-```
+``` html
 <iframe 
 	width="100%" 
 	height="550" 
