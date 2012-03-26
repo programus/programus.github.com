@@ -4,7 +4,7 @@
   <title><![CDATA[Category: computer | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/computer/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-03-25T22:02:34+09:00</updated>
+  <updated>2012-03-26T22:09:34+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Draw Something]]></title>
+    <link href="http://programus.github.com/blog/2012/03/26/draw-something/"/>
+    <updated>2012-03-26T21:11:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/03/26/draw-something</id>
+    <content type="html"><![CDATA[<p>昨天晚上经介绍，认识了一个新游戏——Draw Something。当时就迷上了。现在还在玩……</p>
+
+<!--more-->
+
+
+<p>Draw Something是一款移动平台游戏，类似你画我猜。在android和iOS上都有。与大多数你画我猜类游戏不同的是没有限时的异步绘画。</p>
+
+<p>这个游戏，对于我，可以说是很早以前就一直期盼着的游戏类型。昨晚玩上就有一种相见恨晚的感觉。就跟当年学编程，第一次接触面向对象的思想时一样……一种“我X！这么多年想要的就是这个！”的感觉。（跑题了……）</p>
+
+<p>最早接触你猜我画类游戏，是在大概十年前左右的Yahoo。上面有跟现在各大网站流行的你猜我画一般无二的游戏。虽然是英文的，但是判断基准比现在国内社交网站上的更智能些。（比如复数错了都算猜对，意思或拼写上接近的单词会给予颜色提示。）</p>
+
+<p>确切地说，在接触Yahoo的网上游戏之前，早在我上中小学的时候，就跟亲戚的小孩自行发明了类似的游戏。当时我们几个人都比较喜欢乱涂乱画，虽然画得都不咋地，但都自命不凡。为了一较高下，我们发明了画名人猜名字的游戏——一个人画一个名人，大家猜叫什么名字。中小学课本上的插图成了我们当时参考的蓝本，不过游戏规定必须背着画，所以冒出了看不出来到底是马克思还是恩格斯的大胡子（最后由作者爆料——那是达·芬奇）、长得像洋葱头的列宁、神似形不似的鲁迅……</p>
+
+<p>作为一个小时候发明此类游戏的人员之一，看到我画你猜类游戏，怎能不兴奋？于是在十多年前，我就忍着4级险过的英语水平，一边开着词典网站，一边在Yahoo上玩起了那个游戏。
+后来，工作忙了，就把游戏放下了。多年之后，人人之类的网站上出现了你猜我画，再次兴奋了一把。不过偏门词汇太多，网络速度有时不给力，实在让人爱恨交加。</p>
+
+<p>还有一点最不爽的，从Yahoo的游戏到你猜我画都有的问题，就是——限时！这实在是太让人抓狂了。把一个东西画明白，我很有自信，但快速把画画完，我可没那个功力。所以，常常自己的想法没办法很好的表现出来。</p>
+
+<p>直到昨天晚上看到Draw Something，我震惊了！居然没有时限！居然可以擦了重画，居然猜的人还可以看到绘图过程！</p>
+
+<p>这意味着，我可以慢慢精雕细琢，我可以用动画来表现内容，我可以……发挥无限的想象！（说这个游戏跟你猜我画无异的人恐怕都没理解到绘画表现力的精髓啊……）</p>
+
+<p>于是，作为一个喜欢猜画类游戏的人，Draw Something是我目前见过的最好的游戏！没有“之一”。</p>
+
+<p>如果说缺点，就是网络状况不佳时会有些数据传送的bug；免费版没有金币就没有更多的颜色（为了画个绿色，那黄色跟蓝色抹了半天也没出来效果，好在猜的人懂三原色，居然猜到了）……但这些都是瑕不掩瑜的问题。</p>
+
+<p>最后，我再次开始痛恨自己的英文词汇量不足……为了游戏，一定要努力学习英语！（谁说游戏耽误学习的？）</p>
+
+<p>{% include links %}</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Javascript游戏——Memory]]></title>
@@ -231,77 +268,6 @@ rake preview
 </code></p>
 
 <p>查看预览网页<a href="http://localhost:4000">http://localhost:4000</a>……<strong>按钮加入成功</strong>！</p>
-
-<p>{% include links %}</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为Octopress博客追加新浪微博侧栏]]></title>
-    <link href="http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress/"/>
-    <updated>2012-03-03T21:43:00+09:00</updated>
-    <id>http://programus.github.com/blog/2012/03/03/add-weibo-sidebar-into-octopress</id>
-    <content type="html"><![CDATA[<p>配置好了基于Octopress的博客后，发现其右侧边栏（位置自然根据主题会有不同）上有[Twitter][]等内容。因为[墙][]的原因，[Twitter][]始终使用起来不够方便，所以还是[新浪微博][]用的更多。于是，就想在博客里弄一个[微博][]的侧边栏。</p>
-
-<!--more-->
-
-
-<p>{% img left /images/posts/octopress-weibo.png  %}</p>
-
-<h3>实现设想</h3>
-
-<p>[微博][]本身提供了一个嵌入侧边栏的工具，叫<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。于是便想是不是简单嵌入即可呢？</p>
-
-<h3>其他尝试</h3>
-
-<p>但对稍有点费劲的工作，当然首先是上网搜索一下是否有现成方案。果然找到了一篇文章——《<a href="http://blog.tingkun.com/blog/2011/11/05/xin-lang-wei-bo-ce-lan-widgetding-zhi-octopress/">新浪微博侧栏widget定制</a>》。</p>
-
-<p>仔细查看了一下代码，发现作者好粗心，代码里居然没有用变量，而是把自己的用户名直接硬写进去了。另外，貌似只实现了<code>微博名片</code>和<code>关注按钮</code>。而且因为使用了[微博][]的JavaScript API，所以需要一个APP ID。</p>
-
-<h3>回归</h3>
-
-<p>我是懒人，不想搞得那么复杂。于是继续回到自己最初的方案——嵌入<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>。</p>
-
-<p>先到<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>里面生成自己的微博秀嵌入代码。</p>
-
-<p>``` html</p>
-
-<iframe 
-    width="100%" 
-    height="550" 
-    class="share_self"  
-    frameborder="0" 
-    scrolling="no" 
-    src="http://widget.weibo.com/weiboshow/index.php?
-        width=0&
-        height=550&
-        fansRow=1&
-        ptype=1&
-        speed=0&
-        skin=2&
-        isTitle=0&
-        noborder=1&
-        isWeibo=1&
-        isFans=1&
-        uid=1098907490&
-        verifier=abd54ad9&
-        dpc=1">
-</iframe>
-
-
-<p>```</p>
-
-<p>仔细一看，其实就是一个大URL，尝试一下各种参数。最终写了一个<code>weibo.html</code>，放到了<code>source/_includes/asides</code>下面。貌似在<code>.theme/&lt;所用的主题名&gt;/source/_includes/asides</code>下面放着更好，因为切换主题时不会丢失。</p>
-
-<p>{% gist 1966517 weibo.html %}</p>
-
-<p>同时，在<code>_config.yml</code>中加入相关设定——</p>
-
-<p>{% gist 1966517 _config.yml %}</p>
-
-<p>其中的<code>weibo_uid</code>和<code>weibo_verifier</code>是从<a href="http://weibo.com/tool/weiboshow" title="微博秀">微博秀</a>生成的代码中取得的，其它则是显示设定。</p>
-
-<p>至此，搞定了微博的嵌入。</p>
 
 <p>{% include links %}</p>
 ]]></content>
