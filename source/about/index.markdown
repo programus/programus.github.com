@@ -22,7 +22,7 @@ footer: true
 ### 文学作品 ###
 
 **《起源——变形金刚超前传》**
-{% img right /images/pages/origin_s.gif 130 182 %}
+{% img right /images/pages/Origin_s.gif 130 182 %}
 
 * 首发地址：<http://www.tfg2.com/read.php?tid=21775>
 * 起点发布地址：<http://www.qidian.com/Book/1152342.aspx>
@@ -58,8 +58,8 @@ footer: true
 
 ### 机器人作品 ###
 
-* 项目主页：http://nxtprojects.googlecode.com
-* 土豆豆单：http://www.tudou.com/playlist/id/6884526/
+* 项目主页：<http://nxtprojects.googlecode.com>
+* 土豆豆单：<http://www.tudou.com/playlist/id/6884526/>
 
 ### 软件作品 ###
 
