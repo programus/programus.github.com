@@ -63,7 +63,7 @@ footer: true
 
 ### 软件作品 ###
 
-* [[小众软件]]免费提供的空间：<http://programus.appinn.me>
+* [小众软件][]免费提供的空间：<http://programus.appinn.me>
 > 其他待整理……
 
 
