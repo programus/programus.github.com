@@ -9,7 +9,7 @@
   <meta name="author" content="程序猎人">
 
   
-  <meta name="description" content="昨天晚上经介绍，认识了一个新游戏——Draw Something。当时就迷上了。现在还在玩…… ">
+  <meta name="description" content="最近在捣鼓一个基于Node.JS的东西，语言自然是JavaScript了。但后来发现了CoffeeScript，发现确实简便很多，于是变节到了Coffee阵营。 写了两个小模块，忽然想到要测试。最初找到了Jasmine，后来又发现了mocha。经过一番比较斟酌，觉得既然配咖啡（Coffee）， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/26/coffee-mocha-coverage-node-under-windows/">在Windows上使用mocha对基于Node.JS的服务器端CoffeeScript进行测试并通过jscoverage生成覆盖率报告</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-26T22:00:00+09:00" pubdate data-updated="true">2012-05-26</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在捣鼓一个基于<a href="http://nodejs.org" title="Node.JS">Node.JS</a>的东西，语言自然是JavaScript了。但后来发现了<a href="http://coffeescript.org/" title="CoffeeScript">CoffeeScript</a>，发现确实简便很多，于是变节到了<a href="http://coffeescript.org/" title="CoffeeScript">Coffee</a>阵营。</p>
+
+<p>写了两个小模块，忽然想到要测试。最初找到了<a href="http://pivotal.github.com/jasmine/" title="Jasmine">Jasmine</a>，后来又发现了<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>。经过一番比较斟酌，觉得既然配咖啡（<a href="http://coffeescript.org/" title="CoffeeScript">Coffee</a>），自然还是得摩卡（<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>）。所以最终决定使用<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>来做测试工具。</p>
+
+<p>好吧，实际原因是在<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>的主页上看到它支持代码覆盖率检查。后来经过各种折腾才总算搞定了这个覆盖率检查以及报告的查看问题。</p>
+
+<p>其实，这一切在Linux上应该是非常简单的，但我手上只有Windows，所以一波三折。介于网上相关的信息有些零散，并且不够傻瓜，这里做个总结，也算给自己留个笔记吧。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/05/26/coffee-mocha-coverage-node-under-windows/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -458,47 +505,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/12/25/nxtrockboy-dropball/">NXTRockBoy上的第二个原创游戏——Drop Ball</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-25T11:21:00+09:00" pubdate data-updated="true">2009-12-25</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前一段时间工作很忙，本职工作很忙。后来，集中精力制作了第二款NXTRockBoy的游戏——Drop Ball。顺便说一下，第一款游戏在<a href="/blog/2009/10/25/nxtrockboy-bball/">这里</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2009/12/25/nxtrockboy-dropball/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -514,6 +520,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/05/26/coffee-mocha-coverage-node-under-windows/">在Windows上使用mocha对基于Node.JS的服务器端CoffeeScript进行测试并通过jscoverage生成覆盖率报告</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/26/draw-something/">Draw Something</a>
       </li>
     
@@ -527,10 +537,6 @@
     
       <li class="post">
         <a href="/blog/2012/03/07/add-table-data-css-for-octopress/">为Octopress追加数据表格的CSS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/04/share-weibo-button/">为Octopress追加[分享到微博]按钮</a>
       </li>
     
   </ul>

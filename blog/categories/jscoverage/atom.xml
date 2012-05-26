@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jscoverage | 程序猎人的博客]]></title>
+  <link href="http://programus.github.com/blog/categories/jscoverage/atom.xml" rel="self"/>
+  <link href="http://programus.github.com/"/>
+  <updated>2012-05-27T00:58:58+09:00</updated>
+  <id>http://programus.github.com/</id>
+  <author>
+    <name><![CDATA[程序猎人]]></name>
+    <email><![CDATA[programus@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在Windows上使用mocha对基于Node.JS的服务器端CoffeeScript进行测试并通过jscoverage生成覆盖率报告]]></title>
+    <link href="http://programus.github.com/blog/2012/05/26/coffee-mocha-coverage-node-under-windows/"/>
+    <updated>2012-05-26T22:00:00+09:00</updated>
+    <id>http://programus.github.com/blog/2012/05/26/coffee-mocha-coverage-node-under-windows</id>
+    <content type="html"><![CDATA[<p>最近在捣鼓一个基于[Node.JS][]的东西，语言自然是JavaScript了。但后来发现了[CoffeeScript][]，发现确实简便很多，于是变节到了[Coffee][]阵营。</p>
+
+<p>写了两个小模块，忽然想到要测试。最初找到了[Jasmine][]，后来又发现了[mocha][]。经过一番比较斟酌，觉得既然配咖啡（[Coffee][]），自然还是得摩卡（[mocha][]）。所以最终决定使用[mocha][]来做测试工具。</p>
+
+<p>好吧，实际原因是在[mocha][]的主页上看到它支持代码覆盖率检查。后来经过各种折腾才总算搞定了这个覆盖率检查以及报告的查看问题。</p>
+
+<p>其实，这一切在Linux上应该是非常简单的，但我手上只有Windows，所以一波三折。介于网上相关的信息有些零散，并且不够傻瓜，这里做个总结，也算给自己留个笔记吧。</p>
+
+<!-- more -->
+
+
+<h2>安装必需品</h2>
+
+<p>要做这一切，首先上面提到的各种需要的软件是一定要先安装的，下面就一个一个来介绍一下。</p>
+
+<h3>Node.JS</h3>
+
+<p>这个不消说，一切都是基于[Node.JS][]之上的，所以绝对是第一等必需品。[Node.JS][]发展到今天，安装也很简单，从主页上下载Windows版，安装即可。</p>
+
+<p>安装后，打开命令行窗口，执行</p>
+
+<pre><code>node --version
+</code></pre>
+
+<p>看看是不是正确输出了版本号？如果是，恭喜，安装成功了！如果没有……自己上网找找解决方案吧。这个不在本文的讨论范围之内。</p>
+
+<h4>NPM</h4>
+
+<p>另外，[Node.JS][]的包管理工具[NPM][]也应该随着上面的安装一同安装好。可以执行以下命令来验证。</p>
+
+<p>查看版本号</p>
+
+<pre><code>npm --version
+</code></pre>
+
+<p>或者，查看帮助</p>
+
+<pre><code> npm --help
+</code></pre>
+
+<h3>CoffeeScript</h3>
+
+<p>[CoffeeScript][]是一种对JavaScript的简化，它极大程度上地减少了JavaScript里面的各种括号和分号。最终还是要编译成JavaScript执行的。</p>
+
+<p>具体的区别和例子，可以到[Coffee][]的主页上去瞅瞅。一目了然。至于安装，在那里也写得<a href="http://coffeescript.org/#installation">一清二楚</a>。介于都是英文，这里还是做一下简单的介绍吧。</p>
+
+<p>首先，[Coffee][]是[Node.JS][]的一个包，所以就可以用[NPM][]来很方便地进行安装。命令如下：</p>
+
+<pre><code>npm install -g coffee-script
+</code></pre>
+
+<p>这里为什么有个<code>-g</code>？<code>-g</code>的意思是<code>install globally</code>，也就是全局安装。其实说白了就是安装后的包中所带的命令可以直接在命令行执行而不需要去指定所在的目录。比如，按照上面所写的带有<code>-g</code>参数的命令安装后，可以在命令行的任意目录下执行</p>
+
+<pre><code>coffee --version
+</code></pre>
+
+<p>来查看版本。如果上面命令执行成功了，恭喜你！[CoffeeScript][]已经安装好了。</p>
+
+<h3>mocha</h3>
+
+<p>[mocha][]是针对JavaScript的一个测试工具。具体细节请自行参看主页。英文啃不动，请自行寻找辞典。外语学习等有空我另撰文来讨论。</p>
+
+<p>言归正传，[mocha][]也是[Node.JS][]的一个包，所以……对了，你很聪明，用[NPM][]来解决！（什么？你没想到？没关系，跟我一样有前途。）</p>
+
+<pre><code>npm install -g mocha
+</code></pre>
+
+<p>因为[mocha][]也是个需要执行命令的工具，所以我们继续加上<code>-g</code>。</p>
+
+<p>这里顺便说一下<strong><code>-g</code>什么时候用</strong>。如果所要安装的包是以命令的方式被使用，也就是会通过命令行调用其中已经做好的工具命令，就最好加上<code>-g</code>。这样，在命令行下随时可以使用那些命令。如果所要安装的包是需要在代码中被包含，也就是<code>require('xxx')</code>，则不要加<code>-g</code>，而且必须在你的程序所在的目录或者上级的某个目录下执行<code>npm install</code>。</p>
+
+<p>跑题了，现在跑回来。验证[mocha][]安装成功的方法……或许你已经猜到了，就是下面这个带有万能验证参数<code>--version</code>的命令。</p>
+
+<pre><code>mocha --version
+</code></pre>
+
+<p>至此，你已经可以写[Coffee][]代码并进行测试了。执行</p>
+
+<pre><code>mocha --compilers coffee:coffee-script
+</code></pre>
+
+<p>[mocha][]就会自动运行<code>test</code>目录下的测试用例代码进行测试，并给出漂亮的结果报告。</p>
+
+<p>然而我们的重点在于覆盖率如何得到。我最初就是卡在这里了。[mocha][]的文档中虽然提到一个<code>html-cov</code>的<strong>reporter</strong>，但执行<code>mocha --compiler coffee:coffee-script -R html-cov</code>得到的覆盖率永远都是0%，而且所执行过的代码也没有标记。仔细看看文档，发现有这么一段话：</p>
+
+<blockquote><p>The library being tested should first be instrumented by [node-jscoverage][], this allows Mocha to capture the coverage information necessary to produce a single-page HTML report.</p></blockquote>
+
+<p>也就是说，要想导出覆盖率报告，那么被测试的代码必须是被[node-jscoverage][]“蹂躏”过的。跟着链接看了一眼node-jscoverage，居然是个需要在Linux下面编译的东西。这可让我这个在Windows下忍辱负重的家伙如何是好？</p>
+
+<p>没关系，[node-jscoverage][]再强大，充其量不过是[jscoverage][]的加强版。所以，我们直接去找它的本家[jscoverage][]去。到下载页一瞧，本家果然够意思，已经有了编译好的Windows压缩包。那么现在说一下下一个需要安装的软件——</p>
+
+<h3>JSCoverage</h3>
+
+<p>仔细读读文档，会发现[JSCoverage][]的工作原理是把你写好的JavaScript程序给加一层“壳”，加壳的程序的执行结果与原本的程序相同，但这层壳会在代码执行时记录执行过的代码，从而最终统计出代码覆盖率。</p>
+
+<p>又跑题了，拉回来，继续说安装的事儿。在<a href="http://siliconforks.com/jscoverage/download.html">下载页</a>的下半部分可以找到编译好的Windows执行程序。下载之，然后解压缩到一个适当的目录（为了减少未来的麻烦，不建议目录名中带有空格）。再接下来，为了可以在命令行中执行<code>jscoverage</code>，将可执行文件所在的目录加入环境变量的<code>PATH</code>里面。系统环境变量的修改，请参考<a href="http://baike.baidu.com/view/95930.htm">这里</a>的<a href="http://baike.baidu.com/albums/95930/95930/0/0.html#0$d019d2bf676f0a3418d81f09">这个图</a>。</p>
+
+<p>做好上述工作后，在命令行窗口里执行我们的万能验证命令</p>
+
+<pre><code>jscoverage --version
+</code></pre>
+
+<p>什么？出错了？我没说修改了环境变量之后，需要重新打开新的命令行窗口才有效吗？没说？真的没说？那好吧，现在重新启动命令行窗口再试试。</p>
+
+<h2>组织代码</h2>
+
+<h3>业务代码</h3>
+
+<p>至此，需要的软件都安装好了。下面就该写我们的代码了。为了今后处理方便，建议将代码写在<code>lib</code>目录下。原因？稍后会说的。</p>
+
+<p>比如，我写了如下代码（一个问候者）：
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/models/index.coffee </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/lib/models/index.coffee'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">class</span> <span class="nx">Greeter</span>
+</span><span class='line'>  <span class="nv">constructor: </span><span class="nf">(@lang) -&gt;</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="o">!</span><span class="nx">@lang</span><span class="o">?</span>
+</span><span class='line'>  <span class="vi">@lang = </span><span class="s">&#39;en&#39;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">sayHello: </span><span class="nf">(name) -&gt;</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">switch</span> <span class="nx">@lang</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&#39;jp&#39;</span>
+</span><span class='line'>    <span class="c1"># nameさん、こんにちは。</span>
+</span><span class='line'>    <span class="s">&quot;</span><span class="si">#{</span><span class="k">if</span> <span class="nx">name</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">\u3055\u3093\u3001&quot;</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="si">}</span><span class="s">\u3053\u3093\u306B\u3061\u306F\u3002&quot;</span>
+</span><span class='line'>  <span class="k">when</span> <span class="s">&#39;zh&#39;</span>
+</span><span class='line'>    <span class="c1"># name，你好！吃了没？</span>
+</span><span class='line'>    <span class="s">&quot;</span><span class="si">#{</span><span class="k">if</span> <span class="nx">name</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">\uFF0C&quot;</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="si">}</span><span class="s">\u4F60\u597D\uFF01\u5403\u4E86\u6CA1\uFF1F&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="s">&quot;Hello</span><span class="si">#{</span><span class="k">if</span> <span class="nx">name</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;, </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="si">}</span><span class="s">!&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">exports.Greeter = </span><span class="nx">Greeter</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+放在<code>lib/models</code>下，并命名为<code>index.coffee</code>。命名为index，在引入模块的时候可以直接以目录名来引入。</p>
+
+<h3>测试用例代码</h3>
+
+<p>代码写好了，接下来写一下测试用的代码。之前提过，[mocha][]会自动处理<code>test</code>目录下的内容，所以测试用例代码我们都放在<code>test</code>目录下。</p>
+
+<p>我们的<code>Greeter</code>类有两个函数：构造函数和<code>sayHello()</code>函数。而<code>sayHello()</code>函数的参数又是可选的。因此测试代码如下：
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>test/models.test.coffee </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/test/models.test.coffee'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Test</span> <span class="nx">suites</span> <span class="k">for</span> <span class="nx">all</span> <span class="nx">models</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">chai = </span><span class="nx">require</span> <span class="s">&#39;chai&#39;</span>
+</span><span class='line'><span class="nv">should = </span><span class="nx">chai</span><span class="p">.</span><span class="nx">should</span><span class="p">()</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">models = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;../req&#39;</span><span class="p">)</span> <span class="s">&#39;models&#39;</span>
+</span><span class='line'><span class="nv">Greeter = </span><span class="nx">models</span><span class="p">.</span><span class="nx">Greeter</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">langs = </span><span class="p">[</span>
+</span><span class='line'>  <span class="s">&#39;zh&#39;</span>
+</span><span class='line'>  <span class="s">&#39;en&#39;</span>
+</span><span class='line'>  <span class="s">&#39;jp&#39;</span>
+</span><span class='line'><span class="p">]</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">hellos =</span>
+</span><span class='line'>  <span class="nv">zh: </span><span class="s">&#39;你好！吃了没？&#39;</span>
+</span><span class='line'>  <span class="nv">en: </span><span class="s">&#39;Hello!&#39;</span>
+</span><span class='line'>  <span class="nv">jp: </span><span class="s">&#39;こんにちは。&#39;</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nv">hellosWithName =</span>
+</span><span class='line'>  <span class="nx">zh</span><span class="o">:&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">name: </span><span class="s">&#39;老舍&#39;</span>
+</span><span class='line'><span class="nv">greet: </span><span class="s">&#39;老舍，你好！吃了没？&#39;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">en</span><span class="o">:&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">name: </span><span class="s">&#39;Jack&#39;</span>
+</span><span class='line'><span class="nv">greet: </span><span class="s">&#39;Hello, Jack!&#39;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">jp</span><span class="o">:&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">name: </span><span class="s">&#39;武蔵&#39;</span>
+</span><span class='line'><span class="nv">greet: </span><span class="s">&#39;武蔵さん、こんにちは。&#39;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">describe</span> <span class="s">&#39;Greeter&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="nx">describe</span> <span class="s">&#39;#constructor()&#39;</span><span class="p">,</span> <span class="o">-&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span> <span class="s">&#39;should have language set&#39;</span><span class="p">,</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">new</span> <span class="nx">Greeter</span><span class="p">(</span><span class="nx">l</span><span class="p">).</span><span class="nx">lang</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="k">for</span> <span class="nx">l</span> <span class="k">in</span> <span class="nx">langs</span>
+</span><span class='line'><span class="nx">it</span> <span class="s">&#39;should become default language, en&#39;</span><span class="p">,</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">new</span> <span class="nx">Greeter</span><span class="p">().</span><span class="nx">lang</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="s">&#39;en&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nx">describe</span> <span class="s">&#39;#sayHello()&#39;</span><span class="p">,</span> <span class="o">-&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">it</span> <span class="s">&#39;should greet without name&#39;</span><span class="p">,</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">new</span> <span class="nx">Greeter</span><span class="p">(</span><span class="nx">l</span><span class="p">).</span><span class="nx">sayHello</span><span class="p">().</span><span class="nx">should</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="nx">hellos</span><span class="p">[</span><span class="nx">l</span><span class="p">])</span> <span class="k">for</span> <span class="nx">l</span> <span class="k">in</span> <span class="nx">langs</span>
+</span><span class='line'><span class="nx">it</span> <span class="s">&#39;should greet with name&#39;</span><span class="p">,</span> <span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">new</span> <span class="nx">Greeter</span><span class="p">(</span><span class="nx">l</span><span class="p">).</span><span class="nx">sayHello</span><span class="p">(</span><span class="nx">hellosWithName</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">name</span><span class="p">).</span><span class="nx">should</span><span class="p">.</span><span class="nx">eql</span><span class="p">(</span><span class="nx">hellosWithName</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">greet</span><span class="p">)</span> <span class="k">for</span> <span class="nx">l</span> <span class="k">in</span> <span class="nx">langs</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+细心的人可能发现我最上面写的测试目标的部分和常规写法不太一样。通常会写作
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">models = </span><span class="nx">require</span> <span class="s">&#39;../lib/models&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+而我这里写成了
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">models = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;../req&#39;</span><span class="p">)</span> <span class="s">&#39;models&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+为什么呢？这就涉及到我为[mocha][]的测试写的一个小工具——</p>
+
+<h3>测试辅助工具</h3>
+
+<p>这个工具其实很简单，没几行：
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>req.coffee </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/req.coffee'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">module.exports = </span><span class="nf">(path)-&gt;</span>
+</span><span class='line'>  <span class="k">try</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">require</span> <span class="s">&quot;./lib-cov/</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">catch</span> <span class="nx">e</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">require</span> <span class="s">&quot;./lib/</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+作用就是检查在<code>./lib-cov</code>目录下是否有我们所需的模块，如果有，则导入之，如果没有，则导入<code>./lib</code>下的响应模块。</p>
+
+<p>刚才我们说过，要把代码组织到<code>lib</code>目录（因为req.coffee放在项目根目录下，<code>.</code>又是当前目录，所以这里的<code>lib</code>跟上文的<code>./lib</code>是一会儿事儿）下。我们又说过，[JSCoverage][]计算覆盖率的做法是将代码加个壳，然后让测试程序调用加壳后的代码。这个加壳后的代码就被存储在<code>lib-cov</code>目录下（当然是可以自己指定的目录）。所以，使用这个<code>req.coffee</code>就可以让[mocha][]在有<code>lib-cov</code>目录的情况下使用<code>lib-cov</code>下的内容进行测试，从而为生成覆盖率报告做好准备。</p>
+
+<p>在网上搜索，可以看到大多数解决方案是让设置一个环境变量<code>XXX_COV</code>为1来达到上述目的。而且是以类似下面的样子，将其写到<code>makefile</code>里面
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='make'><span class='line'><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">&lt;pre&gt;&lt;code&gt;XXX_COV=1 mocha --compilers coffee</span><span class="o">:</span><span class="m">coffee-script -R html-cov &amp;gt; coverage.html</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+同时在测试代码中检查环境变量
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nv">models = </span><span class="nx">require</span> <span class="k">if</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">XXX_COV</span> <span class="k">then</span> <span class="s">&#39;../lib-cov/models&#39;</span> <span class="k">else</span> <span class="s">&#39;../lib/models&#39;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+但经试验，如上<code>makefile</code>中设定环境变量的语句在Windows下无效。故此追加了这样一个测试辅助工具。同时，在测试时保证每次生成完覆盖率报告都删除<code>lib-cov</code>目录，就可以正常使用了。</p>
+
+<h2>进行测试</h2>
+
+<p>到这里，我们的准备工作都基本完成了，下一步就是开始进行测试了。</p>
+
+<p>比起上面的各种折腾，测试倒是显得非常容易。</p>
+
+<h3>单纯测试</h3>
+
+<p>先说一下单纯的测试。</p>
+
+<p>其实上面也曾提到过，只需要执行如下一条命令，就可以得到结果：</p>
+
+<pre><code>mocha --compilers coffee:coffee-script
+</code></pre>
+
+<p>用这条命令测试[Coffee][]的代码，不需要格外进行编译。（据说老版本的[mocha][]里自动支持[Coffee][]，不需要指定后面的一长串参数。）</p>
+
+<p>测试后，应该会有如下输出：</p>
+
+<div style="background-color:black;font-family:monospace;font-size:13px;">
+<code>
+<div></div>
+<div style="color:#848284">&#160;&#160;....</div>
+<div></div>
+<div>&#160;&#160;<span style="color:#0f0">✔</span><span style="color:#008200"> 4 tests complete </span><span style="color:#848284">(6ms)</span></div>
+<div></div>
+</code>
+</div>
+
+
+<p>测试成功！</p>
+
+<h3>代码覆盖率报告</h3>
+
+<p>接下来说一下重头戏——如何产生代码覆盖率的报告。</p>
+
+<p>[mocha][]生成报告只需要指定相应的reporter即可。但前提是需要使用[JSCoverage][]处理一下代码。</p>
+
+<p>[JSCoverage][]，顾名思义，只能处理JavaScript的代码，对[CoffeeScript][]目前还是视而不见的。故而，我们首先要将[CoffeeScript][]编译成JavaScript：</p>
+
+<pre><code>coffee -o lib-js -c lib
+</code></pre>
+
+<p>这条命令，会递归地将<code>lib</code>目录下的所有[coffee][]代码编译成js文件，并以同样的目录结构存储到<code>lib-js</code>目录中。</p>
+
+<p>比如，我的<code>lib</code>目录中的文件目前如下（使用<code>tree /f</code>命令生成的结果，根目录内容有部分删节）：</p>
+
+<pre><code>\coffee-mocha-nodejs-coverage-windows-example\lib
+└─models
+        index.coffee
+</code></pre>
+
+<p>编译后的<code>lib-js</code>目录则如下：</p>
+
+<pre><code>\coffee-mocha-nodejs-coverage-windows-example\lib-js
+└─models
+        index.js
+</code></pre>
+
+<p>当然，你也可以去掉<code>-o lib-js</code>的部分，将js文件编译到[coffee][]文件的身边。我倾向于把他们分清楚，所以分了一下目录。</p>
+
+<p>有了js文件，就可以使用[JSCoverage][]了。命令如下：</p>
+
+<pre><code>jscoverage --no-highlight lib-js lib-cov
+</code></pre>
+
+<p>这样就将<code>lib-js</code>目录里的js文件处理好并放进了<code>lib-cov</code>目录。至于那个<code>--no-highlight</code>参数，是为了去掉代码高亮的。如果不去掉，控制高亮的HTML代码会在最终报告中被转义，导致代码严重不可读。（不服你自己试试就知道了。）</p>
+
+<p>现在，我们生成覆盖率报告的材料都准备好了，执行最终的测试命令：</p>
+
+<pre><code>mocha --compilers coffee:coffee-script -R html-cov &gt; coverage.html
+</code></pre>
+
+<p>结束后，打开<code>coverage.html</code>文件，就可以看到最终的报告了。</p>
+
+<p>如果你的代码是从上面的博客内容中复制的，那么覆盖率应该是100%。覆盖率报告的样子应该与此大致相同：<a href="/downloads/pages/coverage.html">coverage.html</a></p>
+
+<p>如果你对报告有所怀疑，可以将测试用例中的一部分<code>it</code>改成<code>xit</code>（<code>xit</code>代表此条不进行测试），然后再次运行上述命令试试看。</p>
+
+<p>至此，我们实现了在Windows上使用[mocha][]对基于[Node.JS][]的服务器端[CoffeeScript][]进行测试并通过[JSCoverage][]生成覆盖率报告。</p>
+
+<p><strong>但是……</strong></p>
+
+<p>会不会觉得上面那么多命令，每次敲来敲去会让手指发疼，关节发麻，有腱鞘炎倾向？没关系，我们仍然有更好的解决方案——</p>
+
+<h2>使用make</h2>
+
+<p><code>make</code>是Linux下面的著名命令。用来方便地批量地完成编译、安装等一系列工作。说实话，我对<code>make</code>也不是了解太多，虽然以前有所接触，但基本都是这次研究这个测试问题才开始真正学习了一些。</p>
+
+<p>如果你要搜索[mocha][]的覆盖率测试，估计很多结果中都提到了在<code>makefile</code>中如何动手脚的文章。由于不懂<code>make</code>到底是什么，被误导了不少，后来才明白，文中提到的<code>makefile</code>其实都是他们自己写的文件。有了那神奇的<code>makefile</code>，就可以用非常简单的命令来批量执行上面的各种或长或短的命令了。</p>
+
+<h3>安装make</h3>
+
+<p>我使用的是<a href="http://gnuwin32.sourceforge.net/packages/make.htm">GNU Make for Windows</a>。</p>
+
+<p>为了使用[Octopress][]这套博客系统，之前安装了[Ruby][]，里面自带了<code>make</code>，所以我就没有安装。</p>
+
+<p>如果你要独立安装<code>make</code>，可以到<a href="http://gnuwin32.sourceforge.net/packages/make.htm">主页</a>上寻找安装程序，然后安装之。再然后，用万能确认命令确认：</p>
+
+<pre><code>make --version
+</code></pre>
+
+<p>如果出错，很可能是环境变量的<code>PATH</code>没有设置好，手动设置一下即可。</p>
+
+<h3>撰写makefile</h3>
+
+<p>安装好<code>make</code>后，就需要撰写<code>makefile</code>了。这是个挺麻烦的事儿。因为很多Windows的命令都不被支持。好在你看到这篇文章时，已经有我这个大善人写好了一份现成的<code>makefile</code>了。你只需复制或者下载即可，内容如下：
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>makefile </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/makefile'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='make'><span class='line'><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span><span class="nv">REPORT_FILE</span><span class="o">=</span>coverage.html
+</span><span class='line'><span class="nv">RMJS</span><span class="o">=</span>rmdir.js
+</span><span class='line'><span class="nv">RMV</span><span class="o">=</span>node <span class="k">$(</span>RMJS<span class="k">)</span>
+</span><span class='line'><span class="c"># change this if using linux or others</span>
+</span><span class='line'><span class="nv">BROWSE</span><span class="o">=</span>start
+</span><span class='line'>
+</span><span class='line'>all: | <span class="nb">test</span>-all coverage
+</span><span class='line'>
+</span><span class='line'><span class="c"># use this to cross platform</span>
+</span><span class='line'><span class="k">$(</span>RMJS<span class="k">)</span>:
+</span><span class='line'>    @echo <span class="s1">&#39;var f=require(&quot;fs&quot;),t=require(&quot;path&quot;);var r=function(a){var b=f.readdirSync(a);for(var c=0;c&amp;lt;b.length;c++){var d=b[c];if(d!==&quot;.&quot;&amp;amp;&amp;amp;d!=&quot;..&quot;){d=t.join(a,d);if(f.statSync(d).isDirectory()){r(d)}else{try{f.unlinkSync(d)}catch(e){}}}}try{f.rmdirSync(a)}catch(e){}};try{r(process.argv[2])}catch(e){}&#39;</span> &amp;gt; <span class="k">$(</span>RMJS<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># use this to cross platform</span>
+</span><span class='line'>rmtools:
+</span><span class='line'>    @coffee -e <span class="s2">&quot;require(&#39;fs&#39;).unlink &#39;rmdir.js&#39;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span>-all:
+</span><span class='line'>    @echo <span class="s1">&#39;Testing...&#39;</span>
+</span><span class='line'>    @mocha --compilers coffee:coffee-script
+</span><span class='line'>
+</span><span class='line'>compile-coffee: <span class="k">$(</span>RMJS<span class="k">)</span>
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> lib-js
+</span><span class='line'>    @echo <span class="s1">&#39;CoffeeScript -&amp;gt; JavaScript compiling...&#39;</span>
+</span><span class='line'>    @coffee -o lib-js -c lib
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> -p
+</span><span class='line'>
+</span><span class='line'>clean-compile:
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> -p
+</span><span class='line'>
+</span><span class='line'>jscoverage:
+</span><span class='line'>    @jscoverage --no-highlight lib-js lib-cov
+</span><span class='line'>
+</span><span class='line'>mocha-html-cov:
+</span><span class='line'>    @echo <span class="s1">&#39;Testing and generating coverage report...&#39;</span>
+</span><span class='line'>    @mocha --compilers coffee:coffee-script -R html-cov &amp;gt; <span class="k">$(</span>REPORT_FILE<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>clean-coverage:
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> lib-js
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> lib-cov
+</span><span class='line'>
+</span><span class='line'>open-coverage:
+</span><span class='line'>    @echo <span class="s1">&#39;Openning report in your default browser...&#39;</span>
+</span><span class='line'>    @<span class="k">$(</span>BROWSE<span class="k">)</span> <span class="k">$(</span>REPORT_FILE<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>clean-report:
+</span><span class='line'>    @<span class="k">$(</span>RMV<span class="k">)</span> <span class="k">$(</span>REPORT_FILE<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'>compile: | <span class="k">$(</span>RMJS<span class="k">)</span> compile-coffee rmtools
+</span><span class='line'>
+</span><span class='line'>coverage: | <span class="k">$(</span>RMJS<span class="k">)</span> compile-coffee jscoverage mocha-html-cov clean-coverage rmtools open-coverage
+</span><span class='line'>
+</span><span class='line'>clean: | <span class="k">$(</span>RMJS<span class="k">)</span> clean-compile clean-coverage clean-report rmtools
+</span><span class='line'>
+</span><span class='line'>.PHONY: all <span class="nb">test</span>-all compile-coffee clean-compile jscoverage mocha-html-cov clean-coverage open-coverage clean-report compile coverage clean rmtoos
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+虽说我是个大善人，但毕竟也是第一次写<code>makefile</code>，如果你是懂行的，发现了不足之处，请一定留言告诉我。</p>
+
+<p>这里，有几点简单说明一下。</p>
+
+<ul>
+<li><p>一个是<code>RMJS</code>这个东西。这是一个递归删除目录的js文件，在<code>makefile</code>中通过<code>echo</code>命令将内容写到文件中，并在用完后删除。之所以这么做，是因为无论是Windows的<code>rd</code>命令还是Linux的<code>rm</code>命令（当然是for Windows版本）都无法很好地删除目录。Windows的<code>rd</code>命令的问题是，<code>make</code>貌似不识别它，即便识别了，也会在<code>/s /q</code>（静默递归删除）参数上出现错误。而<code>rm</code>命令的问题更有趣。其它目录都没有问题，但在编译[Coffee][]的命令执行后，如果在编译期间创建了新的目录则会产生一个名为<code>-p</code>的目录。估计是内部使用了Linux下的<code>mkdir -p</code>命令造成的。当使用<code>rm -rf -p</code>来删除时，<code>-p</code>会被识别为<code>rm</code>命令的参数而导致失败。故而，制造了这个<code>RMJS</code>。同时还可以达到跨平台的目的。同样，删除文件也用的是[coffee][]脚本完成的。</p></li>
+<li><p>另一个是<code>BROWSE</code>，在Windows下<code>start</code>命令可以使用默认打开方式打开文件，所以将查看HTML报告的命令定义为<code>start</code>。基本来讲，这里的<code>makefile</code>是可以跨平台移植的，当移植到其他平台时，需要修改此命令的定义。</p></li>
+<li><p>最后一点，也是最重要的一点：<strong>文件名必须是小写的<code>makefile</code></strong>。如果大小写不对，会导致<code>make</code>无法识别。</p></li>
+</ul>
+
+
+<h2>全部内容</h2>
+
+<p>本文中提到的所有代码，都被提交到了[GitHub][]上，工程名字叫<a href="https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example">coffee-mocha-nodejs-coverage-windows-example</a>。（好吧，我知道名字长了点……）</p>
+
+<p>有兴趣的话，可以到那里取得所有的代码。</p>
+
+<p>
+[Ruby]:			http://www.ruby-lang.org						"Ruby"
+[git]:			http://git-scm.com/								"Git"
+[Jekyll]:		https://github.com/mojombo/jekyll/wiki			"Jekyll"
+[Octopress]:	http://octopress.org							"Octopress"
+[Markdown]:		http://daringfireball.net/projects/markdown/	"Markdown"
+[Google]:		http://www.google.com							"Google"
+[Yahoo]:		http://www.yahoo.com							"Yahoo"
+[Twitter]:		http://twitter.com/								"Twitter"
+
+[Firebug]:		http://getfirebug.com/							"Firebug"
+
+[Wikipedia]:	http://www.wikipedia.org						"Wikipedia"
+[维基百科]:		http://zh.wikipedia.org							"维基中文"
+
+[煎蛋]:			http://jandan.net								"煎蛋"
+[小众软件]:		http://appinn.com								"小众软件"
+[小众]:			http://appinn.com								"小众软件"
+[新浪微博]:		http://weibo.com								"新浪微博"
+[微博]:			http://weibo.com								"新浪微博"
+[墙]:			http://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E	"叹息之墙"
+[知乎]:			http://www.zhihu.com							"知乎"
+
+[CSSer]:		http://www.csser.com/							"CSSer"
+
+[Node.JS]:		http://nodejs.org								"Node.JS"
+[NPM]:			http://search.npmjs.org/						"NPM Registry"
+[mocha]:		http://visionmedia.github.com/mocha/			"mocha"
+[CoffeeScript]:	http://coffeescript.org/						"CoffeeScript"
+[Coffee]:		http://coffeescript.org/						"CoffeeScript"
+[JSCoverage]:	http://siliconforks.com/jscoverage/				"JSCoverage"
+[node-jscoverage]: https://github.com/visionmedia/node-jscoverage "node-jscoverage"
+[Jasmine]:		http://pivotal.github.com/jasmine/				"Jasmine"
+
+[GitHub]:		https://github.com								"GitHub"
+
+</p>
+]]></content>
+  </entry>
+  
+</feed>
