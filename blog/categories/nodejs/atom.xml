@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nodejs | 程序猎人的博客]]></title>
   <link href="http://programus.github.com/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://programus.github.com/"/>
-  <updated>2012-05-27T00:58:58+09:00</updated>
+  <updated>2012-05-27T01:29:26+09:00</updated>
   <id>http://programus.github.com/</id>
   <author>
     <name><![CDATA[程序猎人]]></name>
@@ -126,7 +126,7 @@
 
 <h3>业务代码</h3>
 
-<p>至此，需要的软件都安装好了。下面就该写我们的代码了。为了今后处理方便，建议将代码写在<code>lib</code>目录下。原因？稍后会说的。</p>
+<p>至此，需要的软件都安装好了。下面就该写我们的代码了。为了今后处理方便，建议将代码写在<code>lib</code>目录下。原因？据说就是一种约定俗成（据说是因为从网上查到的，不是我说的）。</p>
 
 <p>比如，我写了如下代码（一个问候者）：
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/models/index.coffee </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/lib/models/index.coffee'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -604,6 +604,37 @@
 <li><p>最后一点，也是最重要的一点：<strong>文件名必须是小写的<code>makefile</code></strong>。如果大小写不对，会导致<code>make</code>无法识别。</p></li>
 </ul>
 
+
+<h3>使用make</h3>
+
+<p>那么，写好了这个<code>makefile</code>，怎么用呢？</p>
+
+<p>只要到有<code>makefile</code>的目录下，执行<code>make</code>命令即可。</p>
+
+<p>单纯的测试，执行：</p>
+
+<pre><code>make test-all
+</code></pre>
+
+<p>编译[CoffeeScript][]，执行：</p>
+
+<pre><code>make compile
+</code></pre>
+
+<p>代码覆盖率报告，执行：</p>
+
+<pre><code>make coverage
+</code></pre>
+
+<p>先测试，然后出覆盖率报告：</p>
+
+<pre><code>make
+</code></pre>
+
+<p>清理现场（删除中间生成的目录、文件）：</p>
+
+<pre><code>make clean
+</code></pre>
 
 <h2>全部内容</h2>
 
