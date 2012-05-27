@@ -187,6 +187,77 @@
 
 <p><a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>就会自动运行<code>test</code>目录下的测试用例代码进行测试，并给出漂亮的结果报告。</p>
 
+<p>对不起，我说早了。如果你写了测试用例，或者手快，从这个博客的下面的内容里复制了测试用例，那么运行上述命令后，十有八九是会出现类似下面这样的错误。</p>
+
+<pre><code>node.js:201
+        throw e; // process.nextTick error, or 'error' event on first tick
+              ^
+Error: Cannot find module 'chai'
+    at Function._resolveFilename (module.js:332:11)
+    at Function._load (module.js:279:25)
+    at Module.require (module.js:354:17)
+    at require (module.js:370:17)
+    ........（以下省略若干行）
+</code></pre>
+
+<p>原因是我们缺少测试时必须的检验库（assertion library），下面就来说一下检验包的安装。（如果你没有写任何测试用例，上面的命令不会出错，但为了后面不折腾，还是跟着下面的内容安装一下为好。）</p>
+
+<h3>should.js / expect.js / chai</h3>
+
+<p>使用<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>进行测试，需要自备数据检验库。数据检验库的作用是用来验证期待值与实际值一致与否的。<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>支持的检验库有如下三种：</p>
+
+<ul>
+<li><a href="https://github.com/visionmedia/should.js">should.js</a>：使用 <em>被检验值</em>.should.<em>检验方法</em>(<em>期待值</em>) 的语法进行验证。</li>
+<li><a href="https://github.com/LearnBoost/expect.js">expect.js</a>：使用 expect(<em>被检验值</em>).to.<em>检验方法</em>(<em>期待值</em>) 的语法进行验证。</li>
+<li><a href="http://chaijs.com/">chai</a>：支持以上两种语法和 assert.<em>检验方法</em>(<em>被检验值</em>, <em>期待值</em>) 的语法。</li>
+</ul>
+
+
+<p>在网上查找的结果发现should.js有诸多不便，又因为chai包罗万象，所以我决定采用chai来进行自己的测试。</p>
+
+<p>安装方法在各个检验库的主页中都有所描述。而且，既然是基于<a href="http://nodejs.org" title="Node.JS">Node.JS</a>的库，自然需要祭出<a href="http://search.npmjs.org/" title="NPM Registry">NPM</a>这一神器。以chai为例，命令如下：</p>
+
+<pre><code>npm install chai
+</code></pre>
+
+<p>因为我们在测试用例代码中要引入这个库（或者说包），所以这里没有加<code>-g</code>参数。另外，执行此命令的目录要在项目的根目录下，这样就可以在项目下的任何目录的代码中引入它了。</p>
+
+<p>安装成功后，会在目录下建一个名为<code>node_modules</code>的目录。这个目录是专门用来放各种依赖包的。要确认安装了哪些包，可以用</p>
+
+<pre><code>npm list
+</code></pre>
+
+<p>来查看。执行上面命令，如果你看到类似<code>chai@1.0.1</code>的内容，说明安装成功了。<code>@</code>后面是版本号。</p>
+
+<p>另外，为了便于管理依赖包，也可以使用<code>package.json</code>文件进行记录和管理，然后使用不带参数的<code>npm install</code>命令自动安装所有缺失的包。</p>
+
+<p>我们这个例子的<code>package.json</code>文件如下：</p>
+
+<figure class='code'><figcaption><span>package.json </span><a href='https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/package.json'>github-source </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;name&quot;</span><span class="p">:</span>          <span class="s2">&quot;coffee-mocha-nodejs-coverage-windows-example&quot;</span>
+</span><span class='line'>  <span class="p">,</span> <span class="nt">&quot;version&quot;</span><span class="p">:</span>       <span class="s2">&quot;0.0.1&quot;</span>
+</span><span class='line'>  <span class="p">,</span> <span class="nt">&quot;private&quot;</span><span class="p">:</span>       <span class="kc">true</span>
+</span><span class='line'>  <span class="p">,</span> <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;chai&quot;</span><span class="p">:</span>        <span class="s2">&quot;1.0.1&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>dependencies</code>中就记录了依赖的包和版本号。</p>
+
+<p>装好了<code>chai</code>，测试应该就不成问题了。</p>
+
+<p><strong>然而！</strong></p>
+
 <p>然而我们的重点在于覆盖率如何得到。我最初就是卡在这里了。<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>的文档中虽然提到一个<code>html-cov</code>的<strong>reporter</strong>，但执行<code>mocha --compiler coffee:coffee-script -R html-cov</code>得到的覆盖率永远都是0%，而且所执行过的代码也没有标记。仔细看看文档，发现有这么一段话：</p>
 
 <blockquote><p>The library being tested should first be instrumented by <a href="https://github.com/visionmedia/node-jscoverage" title="node-jscoverage">node-jscoverage</a>, this allows Mocha to capture the coverage information necessary to produce a single-page HTML report.</p></blockquote>
@@ -257,7 +328,7 @@
 
 <h3>测试用例代码</h3>
 
-<p>代码写好了，接下来写一下测试用的代码。之前提过，<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>会自动处理<code>test</code>目录下的内容，所以测试用例代码我们都放在<code>test</code>目录下。</p>
+<p>代码写好了，接下来写一下测试用例的代码。之前提过，<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>会自动处理<code>test</code>目录下的内容，所以测试用例代码我们都放在<code>test</code>目录下。</p>
 
 <p>我们的<code>Greeter</code>类有两个函数：构造函数和<code>sayHello()</code>函数。而<code>sayHello()</code>函数的参数又是可选的。因此测试代码如下：</p>
 
@@ -381,7 +452,7 @@
 
 <p>作用就是检查在<code>./lib-cov</code>目录下是否有我们所需的模块，如果有，则导入之，如果没有，则导入<code>./lib</code>下的响应模块。</p>
 
-<p>刚才我们说过，要把代码组织到<code>lib</code>目录（因为req.coffee放在项目根目录下，<code>.</code>又是当前目录，所以这里的<code>lib</code>跟上文的<code>./lib</code>是一会儿事儿）下。我们又说过，<a href="http://siliconforks.com/jscoverage/" title="JSCoverage">JSCoverage</a>计算覆盖率的做法是将代码加个壳，然后让测试程序调用加壳后的代码。这个加壳后的代码就被存储在<code>lib-cov</code>目录下（当然是可以自己指定的目录）。所以，使用这个<code>req.coffee</code>就可以让<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>在有<code>lib-cov</code>目录的情况下使用<code>lib-cov</code>下的内容进行测试，从而为生成覆盖率报告做好准备。</p>
+<p>刚才说过，要把代码组织到<code>lib</code>目录（因为req.coffee放在项目根目录下，<code>.</code>又是当前目录，所以这里的<code>lib</code>跟上文的<code>./lib</code>是一会儿事儿）下。我们又说过，<a href="http://siliconforks.com/jscoverage/" title="JSCoverage">JSCoverage</a>计算覆盖率的做法是将代码加个壳，然后让测试程序调用加壳后的代码。这个加壳后的代码就被存储在<code>lib-cov</code>目录下（当然是可以自己指定的目录）。所以，使用这个<code>req.coffee</code>就可以让<a href="http://visionmedia.github.com/mocha/" title="mocha">mocha</a>在有<code>lib-cov</code>目录的情况下使用<code>lib-cov</code>下的内容进行测试，从而为生成覆盖率报告做好准备。</p>
 
 <p>在网上搜索，可以看到大多数解决方案是让设置一个环境变量<code>XXX_COV</code>为1来达到上述目的。而且是以类似下面的样子，将其写到<code>makefile</code>里面</p>
 
