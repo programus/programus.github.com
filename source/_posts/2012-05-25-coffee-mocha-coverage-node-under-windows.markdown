@@ -82,6 +82,62 @@ categories:
 
 [mocha][]就会自动运行`test`目录下的测试用例代码进行测试，并给出漂亮的结果报告。
 
+对不起，我说早了。如果你写了测试用例，或者手快，从这个博客的下面的内容里复制了测试用例，那么运行上述命令后，十有八九是会出现类似下面这样的错误。
+
+	node.js:201
+        	throw e; // process.nextTick error, or 'error' event on first tick
+              	  ^
+	Error: Cannot find module 'chai'
+    	at Function._resolveFilename (module.js:332:11)
+    	at Function._load (module.js:279:25)
+    	at Module.require (module.js:354:17)
+    	at require (module.js:370:17)
+    	........（以下省略若干行）
+
+原因是我们缺少测试时必须的检验库（assertion library），下面就来说一下检验包的安装。（如果你没有写任何测试用例，上面的命令不会出错，但为了后面不折腾，还是跟着下面的内容安装一下为好。）
+
+### should.js / expect.js / chai
+使用[mocha][]进行测试，需要自备数据检验库。数据检验库的作用是用来验证期待值与实际值一致与否的。[mocha][]支持的检验库有如下三种：
+
+* [should.js](https://github.com/visionmedia/should.js)：使用 _被检验值_.should._检验方法_(_期待值_) 的语法进行验证。
+* [expect.js](https://github.com/LearnBoost/expect.js)：使用 expect(_被检验值_).to._检验方法_(_期待值_) 的语法进行验证。
+* [chai](http://chaijs.com/)：支持以上两种语法和 assert._检验方法_(_被检验值_, _期待值_) 的语法。
+
+在网上查找的结果发现should.js有诸多不便，又因为chai包罗万象，所以我决定采用chai来进行自己的测试。
+
+安装方法在各个检验库的主页中都有所描述。而且，既然是基于[Node.JS][]的库，自然需要祭出[NPM][]这一神器。以chai为例，命令如下：
+
+	npm install chai
+
+因为我们在测试用例代码中要引入这个库（或者说包），所以这里没有加`-g`参数。另外，执行此命令的目录要在项目的根目录下，这样就可以在项目下的任何目录的代码中引入它了。
+
+安装成功后，会在目录下建一个名为`node_modules`的目录。这个目录是专门用来放各种依赖包的。要确认安装了哪些包，可以用
+
+	npm list
+
+来查看。执行上面命令，如果你看到类似`chai@1.0.1`的内容，说明安装成功了。`@`后面是版本号。
+
+另外，为了便于管理依赖包，也可以使用`package.json`文件进行记录和管理，然后使用不带参数的`npm install`命令自动安装所有缺失的包。
+
+我们这个例子的`package.json`文件如下：
+
+{% codeblock package.json lang:json https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/package.json github-source %}
+{
+    "name":          "coffee-mocha-nodejs-coverage-windows-example"
+  , "version":       "0.0.1"
+  , "private":       true
+  , "dependencies": {
+      "chai":        "1.0.1"
+  }
+}
+{% endcodeblock %}
+
+其中`dependencies`中就记录了依赖的包和版本号。
+
+装好了`chai`，测试应该就不成问题了。
+
+**然而！**
+
 然而我们的重点在于覆盖率如何得到。我最初就是卡在这里了。[mocha][]的文档中虽然提到一个`html-cov`的**reporter**，但执行`mocha --compiler coffee:coffee-script -R html-cov`得到的覆盖率永远都是0%，而且所执行过的代码也没有标记。仔细看看文档，发现有这么一段话：
 
 > The library being tested should first be instrumented by [node-jscoverage][], this allows Mocha to capture the coverage information necessary to produce a single-page HTML report.
@@ -104,7 +160,7 @@ categories:
 ## 组织代码
 
 ### 业务代码
-至此，需要的软件都安装好了。下面就该写我们的代码了。为了今后处理方便，建议将代码写在`lib`目录下。原因？稍后会说的。
+至此，需要的软件都安装好了。下面就该写我们的代码了。为了今后处理方便，建议将代码写在`lib`目录下。原因？据说就是一种约定俗成（据说是因为从网上查到的，不是我说的）。
 
 比如，我写了如下代码（一个问候者）：
 {% codeblock lib/models/index.coffee lang:coffeescript https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/lib/models/index.coffee github-source %}
@@ -129,7 +185,7 @@ exports.Greeter = Greeter
 放在`lib/models`下，并命名为`index.coffee`。命名为index，在引入模块的时候可以直接以目录名来引入。
 
 ### 测试用例代码
-代码写好了，接下来写一下测试用的代码。之前提过，[mocha][]会自动处理`test`目录下的内容，所以测试用例代码我们都放在`test`目录下。
+代码写好了，接下来写一下测试用例的代码。之前提过，[mocha][]会自动处理`test`目录下的内容，所以测试用例代码我们都放在`test`目录下。
 
 我们的`Greeter`类有两个函数：构造函数和`sayHello()`函数。而`sayHello()`函数的参数又是可选的。因此测试代码如下：
 {% codeblock test/models.test.coffee lang:coffeescript https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example/blob/master/test/models.test.coffee github-source %}
@@ -196,7 +252,7 @@ module.exports = (path)->
 {% endcodeblock %}
 作用就是检查在`./lib-cov`目录下是否有我们所需的模块，如果有，则导入之，如果没有，则导入`./lib`下的响应模块。
 
-刚才我们说过，要把代码组织到`lib`目录（因为req.coffee放在项目根目录下，`.`又是当前目录，所以这里的`lib`跟上文的`./lib`是一会儿事儿）下。我们又说过，[JSCoverage][]计算覆盖率的做法是将代码加个壳，然后让测试程序调用加壳后的代码。这个加壳后的代码就被存储在`lib-cov`目录下（当然是可以自己指定的目录）。所以，使用这个`req.coffee`就可以让[mocha][]在有`lib-cov`目录的情况下使用`lib-cov`下的内容进行测试，从而为生成覆盖率报告做好准备。
+刚才说过，要把代码组织到`lib`目录（因为req.coffee放在项目根目录下，`.`又是当前目录，所以这里的`lib`跟上文的`./lib`是一会儿事儿）下。我们又说过，[JSCoverage][]计算覆盖率的做法是将代码加个壳，然后让测试程序调用加壳后的代码。这个加壳后的代码就被存储在`lib-cov`目录下（当然是可以自己指定的目录）。所以，使用这个`req.coffee`就可以让[mocha][]在有`lib-cov`目录的情况下使用`lib-cov`下的内容进行测试，从而为生成覆盖率报告做好准备。
 
 在网上搜索，可以看到大多数解决方案是让设置一个环境变量`XXX_COV`为1来达到上述目的。而且是以类似下面的样子，将其写到`makefile`里面
 {% codeblock lang:make %}
@@ -366,6 +422,31 @@ module.exports = (path)->
 * 另一个是`BROWSE`，在Windows下`start`命令可以使用默认打开方式打开文件，所以将查看HTML报告的命令定义为`start`。基本来讲，这里的`makefile`是可以跨平台移植的，当移植到其他平台时，需要修改此命令的定义。
 
 * 最后一点，也是最重要的一点：**文件名必须是小写的`makefile`**。如果大小写不对，会导致`make`无法识别。
+
+### 使用make
+那么，写好了这个`makefile`，怎么用呢？
+
+只要到有`makefile`的目录下，执行`make`命令即可。
+
+单纯的测试，执行：
+
+	make test-all
+
+编译[CoffeeScript][]，执行：
+
+	make compile
+
+代码覆盖率报告，执行：
+
+	make coverage
+
+先测试，然后出覆盖率报告：
+
+	make
+
+清理现场（删除中间生成的目录、文件）：
+
+	make clean
 
 ## 全部内容
 本文中提到的所有代码，都被提交到了[GitHub][]上，工程名字叫[coffee-mocha-nodejs-coverage-windows-example](https://github.com/programus/coffee-mocha-nodejs-coverage-windows-example)。（好吧，我知道名字长了点……）
